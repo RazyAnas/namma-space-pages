@@ -14,53 +14,50 @@
   section { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin: 10px 0; }
   h2 { font-size: 15px; margin: 0 0 6px; }
   .hint { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
-  button { width: 100%; min-height: 48px; border-radius: 10px; border: 1px solid var(--cyan); background: #0b2233; color: var(--text); font-size: 16px; font-weight: 600; }
+  button { width: 100%; min-height: 48px; border-radius: 10px; border: 1px solid var(--cyan); background: #0b2233; color: var(--text); font-size: 16px; font-weight: 600; margin-top: 6px; }
   button:active { background: #103349; }
   button:disabled { opacity: .5; }
-  button.risky { border-color: var(--bad); background: #2a0f14; }
+  button.done { border-color: var(--ok); }
   .row { display:flex; gap:8px; margin-top: 8px; }
   .row button { flex:1; }
   #summary { list-style: none; margin: 0; padding: 0; }
   #summary li { display:flex; justify-content:space-between; gap:10px; padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-  #summary li:last-child { border-bottom: 0; }
+  #summary li.head { color: var(--cyan); font-weight: 600; border-bottom-color: var(--cyan); padding-top: 10px; }
   .v { font-weight: 600; text-align: right; }
   .ok { color: var(--ok); } .bad { color: var(--bad); } .warn { color: var(--warn); }
   pre { white-space: pre-wrap; word-break: break-word; font-size: 11.5px; background: #050811; border: 1px solid var(--line); border-radius: 8px; padding: 8px; max-height: 45vh; overflow: auto; margin: 8px 0 0; }
   video { width: 100%; max-height: 180px; background: #000; border-radius: 8px; margin-top: 8px; display: none; }
   #status { position: fixed; left: 0; right: 0; bottom: 0; padding: 10px 14px; background: #0b1324; border-top: 1px solid var(--line); font-size: 14px; }
-  #overlay { display: none; position: fixed; inset: 0; color: #fff; font: 600 20px/1.4 system-ui, sans-serif; text-align: center; padding-top: 30vh; text-shadow: 0 1px 4px #000; }
+  #overlay { display: none; position: fixed; inset: 0; color: #fff; font: 600 20px/1.4 system-ui, sans-serif; text-align: center; padding: 28vh 16px 0; text-shadow: 0 1px 4px #000; }
   #overlay small { display:block; font-weight: 400; font-size: 15px; margin-top: 8px; }
   #overlay button { position: absolute; left: 20%; right: 20%; bottom: 8vh; width: auto; }
 </style>
 </head>
 <body>
 <main>
-  <h1>Namma Space · device probe</h1>
-  <p class="sub">Day-1 phone check for the in-store AR guide. Use Chrome on Android. Nothing leaves the phone unless you copy or share the results.</p>
+  <h1>Namma Space · device probe v1.1</h1>
+  <p class="sub">Phone check for the in-store AR guide. Use Chrome on Android. Nothing leaves the phone unless you copy or share the results.</p>
 
   <section>
     <h2>1 · Phone, camera and motion sensors</h2>
-    <p class="hint">Allow the camera when asked. Takes about 6 seconds.</p>
+    <p class="hint">Allow the camera when asked. Takes about 6 seconds. (Already done? You can skip it.)</p>
     <button id="btnBasics">Run basic checks</button>
     <video id="preview" playsinline muted></video>
   </section>
 
   <section>
-    <h2>2 · AR tracking test</h2>
-    <p class="hint">Point the phone at the floor, then move it slowly sideways for about 8 seconds. Also checks whether the camera still opens while AR is running.</p>
-    <button id="btnAr">Start AR test</button>
+    <h2>2 · AR frame-rate tests (A → D)</h2>
+    <p class="hint">For each test: stand in a lit room, aim the phone at the floor 1–2 m ahead (a rug or tiles helps) and walk slowly forward 2–3 steps. Each test takes 10–12 seconds. Run them in order.</p>
+    <button id="btnA">A · AR, basic features</button>
+    <button id="btnB">B · AR + depth, planes, light</button>
+    <button id="btnC">C · AR + camera pixels (the guide's setup)</button>
+    <button id="btnD">D · AR + ordinary camera opened midway</button>
   </section>
 
   <section>
     <h2>3 · Camera → AR hand-off</h2>
-    <p class="hint">Opens the camera, closes it, then starts AR, and times the gap. This is the moment the app goes from scanning a floor marker to showing arrows.</p>
+    <p class="hint">Opens the camera, closes it, starts AR and times the gap (fallback path).</p>
     <button id="btnHandoff">Run hand-off test</button>
-  </section>
-
-  <section>
-    <h2>4 · Camera pixels inside AR (risky)</h2>
-    <p class="hint">An experimental Chrome feature that crashed this tab on older Chrome. If the page closes, reopen it: results from steps 1–3 are saved.</p>
-    <button id="btnCam" class="risky">Try camera-access (may crash the tab)</button>
   </section>
 
   <section>
@@ -79,12 +76,17 @@
 
 <script>
 'use strict';
-const VERSION = 'probe-1.0 (2026-09-14)';
+const VERSION = 'probe-1.1 (2026-09-14)';
 const $ = (id) => document.getElementById(id);
 const STORE_KEY = 'namma-probe-results';
 let R = {};
 try { R = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (_) { R = {}; }
+if (R.version && R.version.startsWith('probe-1.0')) {
+  R.previousV10 = { ar: R.ar, handoff: R.handoff, cameraAccess: R.cameraAccess };
+  delete R.ar; delete R.handoff; delete R.cameraAccess;
+}
 R.version = VERSION;
+R.tests = R.tests || {};
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const round = (x, d = 1) => (typeof x === 'number' && isFinite(x) ? Math.round(x * 10 ** d) / 10 ** d : x);
@@ -98,56 +100,64 @@ function save() {
 function withTimeout(p, ms, label) {
   return Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error(label + ' timed out after ' + ms + ' ms'), { name: 'Timeout' })), ms))]);
 }
+function stats(arr) {
+  if (!arr.length) return null;
+  const s = [...arr].sort((a, b) => a - b);
+  const q = (p) => s[Math.min(s.length - 1, Math.floor(p * (s.length - 1)))];
+  return { n: s.length, median: round(q(0.5), 2), p95: round(q(0.95), 2), max: round(s[s.length - 1], 2) };
+}
 
 // ---------- summary ----------
 function li(label, value, cls) { return `<li><span>${label}</span><span class="v ${cls || ''}">${value}</span></li>`; }
-function yn(v) { return v === true ? ['yes', 'ok'] : v === false ? ['no', 'bad'] : ['not run', 'warn']; }
+function head(label) { return `<li class="head"><span>${label}</span><span></span></li>`; }
+const TEST_LABELS = { A: 'A · basic AR', B: 'B · + depth/planes/light', C: 'C · + camera pixels', D: 'D · + ordinary camera midway' };
 function render() {
   const s = [];
-  const b = R.basics, ar = R.ar, h = R.handoff, c = R.cameraAccess;
+  const b = R.basics;
   if (b) {
+    s.push(head('Phone'));
     s.push(li('Device', (b.model || '') + ' · Android ' + (b.platformVersion || '?')));
     s.push(li('Chrome', b.chromeVersion || '?'));
     const cam = b.camera && b.camera.ok;
     s.push(li('Rear camera', cam ? `${b.camera.settings.width}×${b.camera.settings.height} @ ${round(b.camera.measuredFps)} fps` : 'failed', cam ? 'ok' : 'bad'));
-    const g = b.sensors;
-    const rate = g && (g.gyroscope?.hz || g.deviceorientation?.hz);
-    s.push(li('Gyro / orientation rate', rate ? round(rate) + ' Hz' : 'none', rate >= 50 ? 'ok' : rate ? 'warn' : 'bad'));
-    s.push(li('WebGPU', b.webgpu?.available ? 'yes' : 'no', b.webgpu?.available ? 'ok' : 'warn'));
+    const rate = b.sensors && (b.sensors.gyroscope?.hz || b.sensors.deviceorientation?.hz);
+    s.push(li('Gyro rate', rate ? round(rate) + ' Hz' : 'none', rate >= 50 ? 'ok' : rate ? 'warn' : 'bad'));
   }
-  if (ar) {
-    const [t, c1] = yn(ar.sessionStarted); s.push(li('AR session starts', t, c1));
-    if (ar.sessionStarted) {
-      const f = ar.enabledFeatures || [];
-      for (const feat of ['local-floor', 'hit-test', 'anchors', 'dom-overlay', 'depth-sensing', 'light-estimation', 'plane-detection']) {
-        const on = f.includes(feat); s.push(li('· ' + feat, on ? 'on' : 'off', on ? 'ok' : (feat === 'hit-test' || feat === 'local-floor') ? 'bad' : 'warn'));
-      }
-      s.push(li('AR frame rate', round(ar.fps) + ' fps', ar.fps >= 50 ? 'ok' : ar.fps >= 25 ? 'warn' : 'bad'));
-      s.push(li('Time to first AR frame', round(ar.firstFrameMs, 0) + ' ms', ar.firstFrameMs < 1500 ? 'ok' : 'warn'));
-      s.push(li('Tracking frames (not emulated)', round(100 * (1 - ar.emulatedFraction), 0) + ' %', ar.emulatedFraction < 0.2 ? 'ok' : 'warn'));
-      s.push(li('Floor hit-test found', ar.hitTest?.framesWithHits ? ar.hitTest.framesWithHits + ' frames' : 'none', ar.hitTest?.framesWithHits ? 'ok' : 'bad'));
-      const gum = ar.getUserMediaDuringAr;
-      s.push(li('Camera opens during AR', gum ? (gum.ok ? 'YES' : 'no (' + (gum.error?.name || '?') + ')') : 'not run', gum?.ok ? 'ok' : 'warn'));
-    } else if (ar.error) s.push(li('AR error', ar.error.name, 'bad'));
+  for (const k of ['A', 'B', 'C', 'D']) {
+    const t = R.tests[k];
+    if (!t) continue;
+    s.push(head(TEST_LABELS[k]));
+    if (!t.sessionStarted) { s.push(li('AR start', 'failed: ' + (t.error?.name || '?'), 'bad')); continue; }
+    s.push(li('Frame rate (median)', round(t.fpsMedian) + ' fps', t.fpsMedian >= 50 ? 'ok' : t.fpsMedian >= 25 ? 'warn' : 'bad'));
+    s.push(li('Worst frames (p95 gap)', round(t.frameIntervalMs?.p95, 0) + ' ms', t.frameIntervalMs?.p95 <= 40 ? 'ok' : 'warn'));
+    s.push(li('Floor found in frames', round(100 * t.hitFrameFraction, 0) + ' %', t.hitFrameFraction > 0.5 ? 'ok' : t.hitFrameFraction > 0 ? 'warn' : 'bad'));
+    s.push(li('Walked (tracked)', round(t.trackedPathM, 2) + ' m', t.trackedPathM > 0.5 ? 'ok' : 'warn'));
+    if (t.depth) s.push(li('Depth valid', round(100 * t.depth.validFraction, 0) + ' %', t.depth.validFraction > 0.5 ? 'ok' : 'warn'));
+    if (t.camera) {
+      const c = t.camera;
+      s.push(li('Camera frames read', c.images ? `${c.images} (${c.width}×${c.height})` : 'none', c.images ? 'ok' : 'bad'));
+      if (c.smallReadMs) s.push(li(`Read ${c.smallSize?.join('×')}`, c.smallReadMs.median + ' ms (p95 ' + c.smallReadMs.p95 + ')', c.smallReadMs.p95 < 12 ? 'ok' : 'warn'));
+      if (c.fullReadMs) s.push(li('Read full frame', c.fullReadMs.median + ' ms', c.fullReadMs.median < 30 ? 'ok' : 'warn'));
+    }
+    if (t.cameraDuringAr) {
+      const g = t.cameraDuringAr;
+      s.push(li('Camera opened during AR', g.ok ? 'yes' : 'no (' + (g.error?.name || '?') + ')', g.ok ? 'ok' : 'warn'));
+      if (t.perSecond) s.push(li('fps per second', t.perSecond.map((x) => x[0]).join(' '), ''));
+    }
   }
-  if (h) {
-    s.push(li('Camera→AR hand-off', h.ok ? round(h.stopToFirstXrFrameMs, 0) + ' ms' : 'failed', h.ok ? (h.stopToFirstXrFrameMs < 1500 ? 'ok' : 'warn') : 'bad'));
-  }
-  if (c) {
-    s.push(li('camera-access in AR', c.enabled ? (c.gotImage ? 'works (' + c.width + '×' + c.height + ')' : 'enabled, no image') : 'unavailable', c.gotImage ? 'ok' : 'warn'));
-  }
+  const h = R.handoff;
+  if (h) { s.push(head('Hand-off')); s.push(li('Camera stop → tracked AR', h.ok ? round(h.stopToTrackedMs ?? h.stopToFirstXrFrameMs, 0) + ' ms' : 'failed', h.ok ? 'ok' : 'bad')); }
   $('summary').innerHTML = s.join('') || li('Nothing run yet', '');
   $('json').textContent = JSON.stringify(R, null, 2);
+  for (const k of ['A', 'B', 'C', 'D']) $('btn' + k).classList.toggle('done', !!R.tests[k]?.sessionStarted);
 }
 render();
 
 // ---------- 1. basics ----------
 async function gatherEnv() {
   const env = {
-    userAgent: navigator.userAgent,
-    secureContext: window.isSecureContext,
-    deviceMemoryGb: navigator.deviceMemory ?? null,
-    hardwareConcurrency: navigator.hardwareConcurrency ?? null,
+    userAgent: navigator.userAgent, secureContext: window.isSecureContext,
+    deviceMemoryGb: navigator.deviceMemory ?? null, hardwareConcurrency: navigator.hardwareConcurrency ?? null,
     screen: { w: screen.width, h: screen.height, dpr: devicePixelRatio },
   };
   const m = navigator.userAgent.match(/Chrome\/([\d.]+)/); env.chromeVersion = m ? m[1] : null;
@@ -161,100 +171,63 @@ async function gatherEnv() {
   } catch (e) { env.uaDataError = errInfo(e); }
   try {
     const gl = document.createElement('canvas').getContext('webgl2');
-    if (gl) {
-      const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-      env.webgl2 = { renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER), maxTexture: gl.getParameter(gl.MAX_TEXTURE_SIZE) };
-    } else env.webgl2 = null;
+    if (gl) { const dbg = gl.getExtension('WEBGL_debug_renderer_info'); env.webgl2 = { renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER), maxTexture: gl.getParameter(gl.MAX_TEXTURE_SIZE) }; }
   } catch (e) { env.webgl2 = { error: errInfo(e) }; }
   env.webgpu = { available: !!navigator.gpu };
   try {
-    if (navigator.gpu) {
-      const ad = await withTimeout(navigator.gpu.requestAdapter(), 3000, 'requestAdapter');
-      env.webgpu.adapter = !!ad;
-      if (ad?.info) env.webgpu.info = { vendor: ad.info.vendor, architecture: ad.info.architecture, device: ad.info.device };
-      if (ad) env.webgpu.maxBufferSize = ad.limits.maxBufferSize;
-    }
+    if (navigator.gpu) { const ad = await withTimeout(navigator.gpu.requestAdapter(), 3000, 'requestAdapter'); env.webgpu.adapter = !!ad; if (ad?.info) env.webgpu.info = { vendor: ad.info.vendor, architecture: ad.info.architecture }; }
   } catch (e) { env.webgpu.error = errInfo(e); }
   env.xr = { available: !!navigator.xr };
-  try {
-    if (navigator.xr) env.xr.immersiveArSupported = await navigator.xr.isSessionSupported('immersive-ar');
-  } catch (e) { env.xr.error = errInfo(e); }
+  try { if (navigator.xr) env.xr.immersiveArSupported = await navigator.xr.isSessionSupported('immersive-ar'); } catch (e) { env.xr.error = errInfo(e); }
   return env;
 }
-
 function countEvents(target, type, ms, pick) {
   return new Promise((resolve) => {
     let n = 0, first = null, last = null, sample = null;
     const h = (ev) => { const t = performance.now(); if (first === null) first = t; last = t; n++; if (!sample && pick) sample = pick(ev); };
     target.addEventListener(type, h);
-    setTimeout(() => {
-      target.removeEventListener(type, h);
-      const hz = n > 1 ? (n - 1) / ((last - first) / 1000) : 0;
-      resolve({ events: n, hz: round(hz), sample });
-    }, ms);
+    setTimeout(() => { target.removeEventListener(type, h); resolve({ events: n, hz: n > 1 ? round((n - 1) / ((last - first) / 1000)) : 0, sample }); }, ms);
   });
 }
-
 async function genericSensor(name, ms) {
   const Ctor = window[name];
   if (!Ctor) return { available: false };
   return new Promise((resolve) => {
     let s, n = 0, first = null, last = null, done = false;
     const finish = (extra) => {
-      if (done) return; done = true;
-      try { s && s.stop(); } catch (_) {}
-      const hz = n > 1 ? (n - 1) / ((last - first) / 1000) : 0;
-      resolve(Object.assign({ available: true, readings: n, hz: round(hz) }, extra || {}));
+      if (done) return; done = true; try { s && s.stop(); } catch (_) {}
+      resolve(Object.assign({ available: true, readings: n, hz: n > 1 ? round((n - 1) / ((last - first) / 1000)) : 0 }, extra || {}));
     };
     try {
       s = new Ctor({ frequency: 60 });
       s.addEventListener('reading', () => { const t = performance.now(); if (first === null) first = t; last = t; n++; });
       s.addEventListener('error', (ev) => finish({ error: errInfo(ev.error) }));
-      s.start();
-      setTimeout(() => finish(), ms);
+      s.start(); setTimeout(() => finish(), ms);
     } catch (e) { finish({ error: errInfo(e) }); }
   });
 }
-
 async function cameraCheck() {
   const out = { ok: false };
   let stream;
   try {
-    stream = await withTimeout(navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 30 } },
-    }), 15000, 'getUserMedia');
+    stream = await withTimeout(navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } } }), 15000, 'getUserMedia');
     const track = stream.getVideoTracks()[0];
-    out.label = track.label;
-    out.settings = track.getSettings();
-    if (track.getCapabilities) {
-      const c = track.getCapabilities();
-      out.capabilities = { width: c.width, height: c.height, frameRate: c.frameRate, focusMode: c.focusMode, exposureMode: c.exposureMode, whiteBalanceMode: c.whiteBalanceMode, zoom: c.zoom, torch: c.torch, focusDistance: c.focusDistance };
-    }
+    out.label = track.label; out.settings = track.getSettings();
+    if (track.getCapabilities) { const c = track.getCapabilities(); out.capabilities = { width: c.width, height: c.height, frameRate: c.frameRate, focusMode: c.focusMode, exposureMode: c.exposureMode, zoom: c.zoom }; }
     const v = $('preview'); v.style.display = 'block'; v.srcObject = stream; await v.play();
     if (v.requestVideoFrameCallback) {
       let n = 0, t0 = null, t1 = null;
       await new Promise((resolve) => {
         const cb = (now) => { if (t0 === null) t0 = now; t1 = now; n++; if (now - t0 < 2000) v.requestVideoFrameCallback(cb); else resolve(); };
-        v.requestVideoFrameCallback(cb);
-        setTimeout(resolve, 3500);
+        v.requestVideoFrameCallback(cb); setTimeout(resolve, 3500);
       });
       out.measuredFps = n > 1 ? round((n - 1) / ((t1 - t0) / 1000)) : 0;
     }
-    try {
-      const devs = await navigator.mediaDevices.enumerateDevices();
-      out.videoInputs = devs.filter((d) => d.kind === 'videoinput').map((d) => d.label || '(unlabelled)');
-    } catch (_) {}
     out.ok = true;
-  } catch (e) {
-    out.error = errInfo(e);
-  } finally {
-    if (stream) stream.getTracks().forEach((t) => t.stop());
-    $('preview').srcObject = null; $('preview').style.display = 'none';
-  }
+  } catch (e) { out.error = errInfo(e); }
+  finally { if (stream) stream.getTracks().forEach((t) => t.stop()); $('preview').srcObject = null; $('preview').style.display = 'none'; }
   return out;
 }
-
 $('btnBasics').onclick = async () => {
   const btn = $('btnBasics'); btn.disabled = true;
   try {
@@ -262,168 +235,232 @@ $('btnBasics').onclick = async () => {
     const env = await gatherEnv();
     setStatus('Opening the rear camera…');
     const camera = await cameraCheck();
-    setStatus('Measuring motion sensors (hold the phone, turn it a little)…');
-    const [deviceorientation, deviceorientationabsolute, devicemotion, gyroscope, absOrient, relOrient] = await Promise.all([
-      countEvents(window, 'deviceorientation', 2500, (e) => ({ alpha: round(e.alpha), beta: round(e.beta), gamma: round(e.gamma), absolute: e.absolute })),
-      countEvents(window, 'deviceorientationabsolute', 2500, (e) => ({ alpha: round(e.alpha) })),
-      countEvents(window, 'devicemotion', 2500, (e) => ({ interval: e.interval, hasRotationRate: !!(e.rotationRate && e.rotationRate.alpha !== null) })),
-      genericSensor('Gyroscope', 2500),
-      genericSensor('AbsoluteOrientationSensor', 2500),
-      genericSensor('RelativeOrientationSensor', 2500),
+    setStatus('Measuring motion sensors…');
+    const [deviceorientation, devicemotion, gyroscope, relOrient] = await Promise.all([
+      countEvents(window, 'deviceorientation', 2500), countEvents(window, 'devicemotion', 2500),
+      genericSensor('Gyroscope', 2500), genericSensor('RelativeOrientationSensor', 2500),
     ]);
-    R.basics = Object.assign(env, { camera, sensors: { deviceorientation, deviceorientationabsolute, devicemotion, gyroscope, absoluteOrientationSensor: absOrient, relativeOrientationSensor: relOrient } });
-    save();
-    setStatus('Basic checks done. Next: AR test.');
-  } catch (e) {
-    R.basics = Object.assign(R.basics || {}, { fatal: errInfo(e) }); save();
-    setStatus('Basic checks failed: ' + e.message);
-  } finally { btn.disabled = false; }
+    R.basics = Object.assign(env, { camera, sensors: { deviceorientation, devicemotion, gyroscope, relativeOrientationSensor: relOrient } });
+    save(); setStatus('Basic checks done. Next: test A.');
+  } catch (e) { setStatus('Basic checks failed: ' + e.message); }
+  finally { btn.disabled = false; }
 };
 
 // ---------- XR helpers ----------
 function makeGl() {
   const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl2', { xrCompatible: true, alpha: true, antialias: false }) || canvas.getContext('webgl', { xrCompatible: true, alpha: true });
+  const gl = canvas.getContext('webgl2', { xrCompatible: true, alpha: true, antialias: false, depth: true }) || canvas.getContext('webgl', { xrCompatible: true, alpha: true });
   if (!gl) throw new Error('No WebGL context');
   return gl;
 }
-
-async function startSession(features, onFail) {
+async function startSession(optional) {
   const gl = makeGl();
-  const overlay = $('overlay');
-  const init = { requiredFeatures: features.required, optionalFeatures: features.optional };
-  if (features.optional.includes('dom-overlay')) init.domOverlay = { root: overlay };
-  if (features.optional.includes('depth-sensing')) init.depthSensing = { usagePreference: ['cpu-optimized', 'gpu-optimized'], dataFormatPreference: ['luminance-alpha', 'float32'] };
-  let session;
+  const init = { requiredFeatures: [], optionalFeatures: optional };
+  if (optional.includes('dom-overlay')) init.domOverlay = { root: $('overlay') };
+  if (optional.includes('depth-sensing')) init.depthSensing = { usagePreference: ['cpu-optimized', 'gpu-optimized'], dataFormatPreference: ['luminance-alpha', 'float32'] };
+  const session = await navigator.xr.requestSession('immersive-ar', init);
   try {
-    session = await navigator.xr.requestSession('immersive-ar', init);
-  } catch (e) {
-    if (onFail) return onFail(e);
-    throw e;
-  }
-  await gl.makeXRCompatible?.();
-  session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
-  let refSpace, refType = 'local-floor';
-  try { refSpace = await session.requestReferenceSpace('local-floor'); }
-  catch (_) { refType = 'local'; refSpace = await session.requestReferenceSpace('local'); }
-  return { session, gl, refSpace, refType };
+    session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
+    let refSpace, refType = 'local-floor';
+    try { refSpace = await session.requestReferenceSpace('local-floor'); }
+    catch (_) { refType = 'local'; refSpace = await session.requestReferenceSpace('local'); }
+    return { session, gl, refSpace, refType };
+  } catch (e) { try { await session.end(); } catch (_) {} throw e; }
 }
-
 function showOverlay(text, sub) { $('overlayText').textContent = text; $('overlaySub').textContent = sub || ''; $('overlay').style.display = 'block'; }
 function hideOverlay() { $('overlay').style.display = 'none'; }
 let endRequested = false;
 $('btnEnd').onclick = () => { endRequested = true; };
 
-// ---------- 2. AR test ----------
-$('btnAr').onclick = async () => {
-  const btn = $('btnAr'); btn.disabled = true; endRequested = false;
-  const out = { sessionStarted: false };
+// Reads WebXR camera-access frames: a 1/4-size copy via a shader every 3rd frame (what a marker
+// detector would use) and a full-size read every 45th frame (to price the expensive path).
+function makeCameraReader(session, gl) {
+  const binding = new XRWebGLBinding(session, gl);
+  const r = { images: 0, nullImages: 0, errors: 0, readsSmall: [], readsFull: [], luma: [] };
+  const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, 'attribute vec2 p; varying vec2 uv; void main(){ uv = p * 0.5 + 0.5; gl_Position = vec4(p, 0.0, 1.0); }'));
+  gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, 'precision mediump float; varying vec2 uv; uniform sampler2D t; void main(){ gl_FragColor = texture2D(t, uv); }'));
+  gl.linkProgram(prog);
+  const aP = gl.getAttribLocation(prog, 'p'), uT = gl.getUniformLocation(prog, 't');
+  const quad = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  let smallFb = null, smallTex = null, sw = 0, shh = 0, smallBuf = null, fullBuf = null;
+  const fullFb = gl.createFramebuffer();
+  r.onFrame = (pose, frameNo) => {
+    for (const view of pose.views) {
+      if (!view.camera) continue;
+      let tex;
+      try { tex = binding.getCameraImage(view.camera); } catch (e) { r.errors++; r.lastError = errInfo(e); continue; }
+      if (!tex) { r.nullImages++; continue; }
+      r.images++; r.width = view.camera.width; r.height = view.camera.height;
+      if (!smallFb) {
+        sw = Math.max(1, Math.round(r.width / 4)); shh = Math.max(1, Math.round(r.height / 4));
+        smallTex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, smallTex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, sw, shh, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        smallFb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, smallFb);
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, smallTex, 0);
+        smallBuf = new Uint8Array(sw * shh * 4);
+        r.smallSize = [sw, shh];
+      }
+      if (frameNo % 3 === 0) {
+        const t0 = performance.now();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, smallFb); gl.viewport(0, 0, sw, shh);
+        gl.disable(gl.DEPTH_TEST); gl.useProgram(prog);
+        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(uT, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, quad); gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 0, 0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        gl.readPixels(0, 0, sw, shh, gl.RGBA, gl.UNSIGNED_BYTE, smallBuf);
+        r.readsSmall.push(performance.now() - t0);
+        if (frameNo % 30 === 0) {
+          let sum = 0, sq = 0, n = 0;
+          for (let i = 0; i < smallBuf.length; i += 16) { const y = 0.299 * smallBuf[i] + 0.587 * smallBuf[i + 1] + 0.114 * smallBuf[i + 2]; sum += y; sq += y * y; n++; }
+          const mean = sum / n; r.luma.push([round(mean), round(Math.sqrt(Math.max(0, sq / n - mean * mean)))]);
+        }
+      }
+      if (frameNo % 45 === 0) {
+        const t0 = performance.now();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fullFb);
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+        if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE) {
+          if (!fullBuf || fullBuf.length !== r.width * r.height * 4) fullBuf = new Uint8Array(r.width * r.height * 4);
+          gl.readPixels(0, 0, r.width, r.height, gl.RGBA, gl.UNSIGNED_BYTE, fullBuf);
+          r.readsFull.push(performance.now() - t0);
+        }
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, null, 0);
+      }
+    }
+  };
+  r.summary = () => ({ images: r.images, nullImages: r.nullImages, errors: r.errors, lastError: r.lastError || null, width: r.width, height: r.height,
+    smallSize: r.smallSize || null, smallReadMs: stats(r.readsSmall), fullReadMs: stats(r.readsFull), lumaMeanStd: r.luma });
+  return r;
+}
+
+// Opens the ordinary camera while AR runs, keeps it streaming for holdMs, then closes it.
+async function holdCameraDuringAr(holdMs) {
+  const info = {};
+  const t = performance.now();
+  let s, v;
+  try {
+    s = await withTimeout(navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } } }), 4000, 'getUserMedia during AR');
+    info.ok = true; info.openMs = round(performance.now() - t, 0);
+    const st = s.getVideoTracks()[0].getSettings(); info.settings = { width: st.width, height: st.height };
+    v = document.createElement('video'); v.muted = true; v.playsInline = true; v.srcObject = s;
+    await v.play().catch(() => {});
+    let n = 0, closed = false;
+    if (v.requestVideoFrameCallback) { const cb = () => { n++; if (!closed) v.requestVideoFrameCallback(cb); }; v.requestVideoFrameCallback(cb); }
+    await sleep(holdMs);
+    closed = true; info.videoFramesWhileHeld = n;
+  } catch (e) { info.ok = false; info.error = errInfo(e); }
+  finally { if (s) s.getTracks().forEach((x) => x.stop()); if (v) v.srcObject = null; }
+  return info;
+}
+
+const BASIC = ['local-floor', 'hit-test', 'anchors', 'dom-overlay'];
+const TESTS = {
+  A: { optional: BASIC, durationMs: 10000 },
+  B: { optional: [...BASIC, 'depth-sensing', 'plane-detection', 'light-estimation'], durationMs: 10000 },
+  C: { optional: [...BASIC, 'camera-access'], durationMs: 12000 },
+  D: { optional: BASIC, durationMs: 12000, cameraAt: 4000, cameraHoldMs: 3000 },
+};
+
+async function runArTest(key) {
+  const cfg = TESTS[key];
+  const buttons = ['A', 'B', 'C', 'D'].map((k) => $('btn' + k));
+  buttons.forEach((b) => (b.disabled = true)); endRequested = false;
+  const out = { features: cfg.optional, sessionStarted: false };
   const tReq = performance.now();
   let ctx;
   try {
     if (!navigator.xr) throw Object.assign(new Error('navigator.xr missing'), { name: 'NoWebXR' });
-    const optional = ['hit-test', 'anchors', 'dom-overlay', 'depth-sensing', 'light-estimation', 'plane-detection'];
-    ctx = await startSession({ required: [], optional: ['local-floor', ...optional] }, async (e) => {
-      out.firstAttemptError = errInfo(e);
-      return startSession({ required: [], optional: ['local-floor', 'hit-test', 'anchors', 'dom-overlay'] });
-    });
+    ctx = await startSession(cfg.optional);
     const { session, gl, refSpace } = ctx;
-    out.sessionStarted = true;
-    out.referenceSpace = ctx.refType;
-    out.enabledFeatures = session.enabledFeatures ? Array.from(session.enabledFeatures) : 'enabledFeatures not exposed';
-    out.environmentBlendMode = session.environmentBlendMode;
-    out.domOverlayType = session.domOverlayState?.type ?? null;
-    out.depthUsage = session.depthUsage ?? null; out.depthDataFormat = session.depthDataFormat ?? null;
-    showOverlay('Move the phone slowly sideways', 'Measuring tracking for 8 seconds');
+    out.sessionStarted = true; out.referenceSpace = ctx.refType;
+    out.enabledFeatures = session.enabledFeatures ? Array.from(session.enabledFeatures) : null;
+    out.depthUsage = session.depthUsage ?? null;
+    out.sessionFrameRate = session.frameRate ?? null;
+    out.supportedFrameRates = session.supportedFrameRates ? Array.from(session.supportedFrameRates) : null;
+    showOverlay('Aim at the floor and walk slowly forward', 'Test ' + key);
 
     let hitSource = null;
-    try {
-      const viewer = await session.requestReferenceSpace('viewer');
-      hitSource = await session.requestHitTestSource({ space: viewer });
-    } catch (e) { out.hitTestError = errInfo(e); }
-
-    const stats = { frames: 0, emulated: 0, firstFrameMs: null, t0: null, tLast: null, positions: [], hitFrames: 0, maxHits: 0, planes: 0, depth: null, anchor: null, light: null };
-    let anchorTried = false, lightProbe = null;
-    if (session.enabledFeatures?.includes?.('light-estimation') && session.requestLightProbe) {
-      session.requestLightProbe().then((p) => { lightProbe = p; }).catch((e) => { stats.light = { error: errInfo(e) }; });
+    try { const viewer = await session.requestReferenceSpace('viewer'); hitSource = await session.requestHitTestSource({ space: viewer }); }
+    catch (e) { out.hitTestError = errInfo(e); }
+    let cam = null;
+    if (out.enabledFeatures?.includes('camera-access') && window.XRWebGLBinding) {
+      try { cam = makeCameraReader(session, gl); } catch (e) { out.cameraReaderError = errInfo(e); }
     }
 
-    // Can the ordinary camera open while AR runs? (EchoVoid: NotReadableError on older Chrome.)
-    const gumPromise = (async () => {
-      await sleep(2500);
-      const t = performance.now();
-      try {
-        const s = await withTimeout(navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } }), 4000, 'getUserMedia during AR');
-        const tr = s.getVideoTracks()[0]; const st = tr.getSettings();
-        s.getTracks().forEach((x) => x.stop());
-        return { ok: true, ms: round(performance.now() - t, 0), settings: { width: st.width, height: st.height, label: tr.label } };
-      } catch (e) { return { ok: false, ms: round(performance.now() - t, 0), error: errInfo(e) }; }
-    })();
-
+    const T = { t0: null, last: null, frames: 0, emulated: 0, hitFrames: 0, planesMax: 0, intervals: [], buckets: [], positions: [], depth: [] };
+    let camPromise = null;
     await new Promise((resolve) => {
       const onFrame = (time, frame) => {
         const now = performance.now();
-        const gl2 = gl; const layer = session.renderState.baseLayer;
-        gl2.bindFramebuffer(gl2.FRAMEBUFFER, layer.framebuffer);
-        gl2.clearColor(0, 0, 0, 0); gl2.clear(gl2.COLOR_BUFFER_BIT | gl2.DEPTH_BUFFER_BIT);
         const pose = frame.getViewerPose(refSpace);
         if (pose) {
-          if (stats.firstFrameMs === null) { stats.firstFrameMs = now - tReq; stats.t0 = now; }
-          stats.tLast = now; stats.frames++;
-          if (pose.emulatedPosition) stats.emulated++;
-          const p = pose.transform.position;
-          if (stats.frames % 6 === 0) stats.positions.push([round(p.x, 3), round(p.y, 3), round(p.z, 3)]);
-          if (hitSource) {
-            const hits = frame.getHitTestResults(hitSource);
-            if (hits.length) { stats.hitFrames++; stats.maxHits = Math.max(stats.maxHits, hits.length); if (!stats.firstHit) { const hp = hits[0].getPose(refSpace); if (hp) stats.firstHit = { y: round(hp.transform.position.y, 3) }; } }
-          }
-          if (frame.detectedPlanes) stats.planes = Math.max(stats.planes, frame.detectedPlanes.size);
-          if (!stats.depth && session.depthUsage === 'cpu-optimized' && frame.getDepthInformation) {
+          if (T.t0 === null) { T.t0 = now; out.firstFrameMs = round(now - tReq, 0); }
+          const elapsed = now - T.t0;
+          const sec = Math.floor(elapsed / 1000);
+          const bucket = T.buckets[sec] || (T.buckets[sec] = [0, 0]);
+          bucket[0]++; T.frames++;
+          if (T.last !== null) T.intervals.push(now - T.last);
+          T.last = now;
+          if (pose.emulatedPosition) T.emulated++;
+          if (T.frames % 5 === 0) { const p = pose.transform.position; T.positions.push([p.x, p.y, p.z]); }
+          if (hitSource) { try { if (frame.getHitTestResults(hitSource).length) { bucket[1]++; T.hitFrames++; } } catch (_) {} }
+          if (frame.detectedPlanes) T.planesMax = Math.max(T.planesMax, frame.detectedPlanes.size);
+          if (out.depthUsage === 'cpu-optimized' && T.frames % 15 === 0 && frame.getDepthInformation) {
             try {
               const d = frame.getDepthInformation(pose.views[0]);
-              if (d) stats.depth = { width: d.width, height: d.height, centreM: round(d.getDepthInMeters(0.5, 0.5), 3), rawValueToMeters: d.rawValueToMeters };
-            } catch (e) { stats.depth = { error: errInfo(e) }; }
+              if (d) { let valid = 0, sum = 0, n = 0; for (let i = 0; i < 8; i++) for (let j = 0; j < 5; j++) { const m = d.getDepthInMeters((i + 0.5) / 8, (j + 0.5) / 5); n++; if (m > 0) { valid++; sum += m; } } T.depth.push([valid / n, valid ? sum / valid : 0]); }
+            } catch (e) { out.depthError = errInfo(e); }
           }
-          if (!anchorTried && stats.frames > 30 && frame.createAnchor) {
-            anchorTried = true;
-            frame.createAnchor(new XRRigidTransform({ x: 0, y: 0, z: -1 }), refSpace)
-              .then((a) => { stats.anchor = { created: true }; setTimeout(() => { try { stats.anchor.stillTracked = frame.session && !!a; a.delete?.(); } catch (_) {} }, 1000); })
-              .catch((e) => { stats.anchor = { created: false, error: errInfo(e) }; });
+          if (cam) { try { cam.onFrame(pose, T.frames); } catch (e) { out.cameraFrameError = errInfo(e); cam = null; } }
+          if (cfg.cameraAt && !camPromise && elapsed > cfg.cameraAt) {
+            out.cameraOpenedAtSec = round(elapsed / 1000, 1);
+            camPromise = holdCameraDuringAr(cfg.cameraHoldMs).then((i) => { i.closedAtSec = round((performance.now() - T.t0) / 1000, 1); return i; });
           }
-          if (lightProbe && !stats.light) {
-            try { const est = frame.getLightEstimate(lightProbe); if (est) stats.light = { primaryLightIntensity: [round(est.primaryLightIntensity.x, 2), round(est.primaryLightIntensity.y, 2), round(est.primaryLightIntensity.z, 2)] }; } catch (e) { stats.light = { error: errInfo(e) }; }
-          }
-          const left = Math.max(0, 8 - (now - stats.t0) / 1000);
-          $('overlaySub').textContent = `Measuring… ${left.toFixed(0)} s · ${stats.hitFrames ? 'floor found' : 'looking for the floor'}`;
-          if (now - stats.t0 > 8000 || endRequested) { resolve(); return; }
-        } else if (now - tReq > 15000) { resolve(); return; }
+          $('overlaySub').textContent = `Test ${key} · ${Math.max(0, (cfg.durationMs - elapsed) / 1000).toFixed(0)} s · ${bucket[0]} fps · ${T.hitFrames ? 'floor found' : 'looking for the floor'}`;
+          if (elapsed > cfg.durationMs || endRequested) { resolve(); return; }
+        } else if (now - tReq > cfg.durationMs + 10000) { resolve(); return; }
+        const layer = session.renderState.baseLayer;
+        gl.bindFramebuffer(gl.FRAMEBUFFER, layer.framebuffer);
+        gl.viewport(0, 0, layer.framebufferWidth, layer.framebufferHeight);
+        gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         session.requestAnimationFrame(onFrame);
       };
       session.addEventListener('end', () => resolve(), { once: true });
       session.requestAnimationFrame(onFrame);
     });
 
-    out.getUserMediaDuringAr = await withTimeout(gumPromise, 8000, 'gum').catch((e) => ({ ok: false, error: errInfo(e) }));
-    const dur = stats.tLast && stats.t0 ? (stats.tLast - stats.t0) / 1000 : 0;
-    out.frames = stats.frames;
-    out.fps = dur > 0 ? round((stats.frames - 1) / dur) : 0;
-    out.firstFrameMs = round(stats.firstFrameMs, 0);
-    out.emulatedFraction = stats.frames ? round(stats.emulated / stats.frames, 3) : 1;
-    let path = 0; for (let i = 1; i < stats.positions.length; i++) { const a = stats.positions[i - 1], b = stats.positions[i]; path += Math.hypot(b[0] - a[0], b[1] - a[1], b[2] - a[2]); }
+    const iv = stats(T.intervals);
+    out.frames = T.frames;
+    out.frameIntervalMs = iv;
+    out.fpsMedian = iv ? round(1000 / iv.median) : 0;
+    out.fpsOverall = T.last && T.t0 ? round((T.frames - 1) / ((T.last - T.t0) / 1000)) : 0;
+    out.perSecond = T.buckets.map((b) => b || [0, 0]);
+    out.emulatedFraction = T.frames ? round(T.emulated / T.frames, 3) : 1;
+    out.hitFrameFraction = T.frames ? round(T.hitFrames / T.frames, 3) : 0;
+    out.planesMax = T.planesMax;
+    let path = 0; for (let i = 1; i < T.positions.length; i++) { const a = T.positions[i - 1], b = T.positions[i]; path += Math.hypot(b[0] - a[0], b[2] - a[2]); }
     out.trackedPathM = round(path, 3);
-    out.viewerHeightM = stats.positions.length ? stats.positions[stats.positions.length - 1][1] : null;
-    out.hitTest = { framesWithHits: stats.hitFrames, maxResults: stats.maxHits, firstHit: stats.firstHit || null };
-    out.planesDetected = stats.planes; out.depth = stats.depth; out.anchor = stats.anchor; out.light = stats.light;
+    if (T.depth.length) out.depth = { samples: T.depth.length, validFraction: round(T.depth.reduce((s, d) => s + d[0], 0) / T.depth.length, 3), meanM: round(T.depth.reduce((s, d) => s + d[1], 0) / T.depth.length, 2) };
+    if (cam) out.camera = cam.summary();
+    if (camPromise) out.cameraDuringAr = await withTimeout(camPromise, 8000, 'camera hold').catch((e) => ({ ok: false, error: errInfo(e) }));
     try { await session.end(); } catch (_) {}
   } catch (e) {
     out.error = errInfo(e);
     try { ctx?.session?.end(); } catch (_) {}
   } finally {
     hideOverlay();
-    R.ar = out; save(); btn.disabled = false;
-    setStatus(out.sessionStarted ? 'AR test done. Next: hand-off test.' : 'AR could not start: ' + (out.error?.message || 'unknown'));
+    R.tests[key] = out; save();
+    buttons.forEach((b) => (b.disabled = false));
+    const next = { A: 'B', B: 'C', C: 'D', D: null }[key];
+    setStatus(out.sessionStarted ? `Test ${key}: ${out.fpsMedian} fps, floor in ${Math.round(100 * out.hitFrameFraction)}% of frames.` + (next ? ` Next: test ${next}.` : ' All AR tests done — copy the results.') : `Test ${key} could not start: ${out.error?.message || 'unknown'}`);
   }
-};
+}
+for (const k of ['A', 'B', 'C', 'D']) $('btn' + k).onclick = () => runArTest(k);
 
 // ---------- 3. hand-off ----------
 $('btnHandoff').onclick = async () => {
@@ -431,7 +468,6 @@ $('btnHandoff').onclick = async () => {
   const out = { ok: false };
   let ctx;
   try {
-    // Request the session inside the tap so user activation is still valid; open the camera first.
     setStatus('Opening camera…');
     const tCam = performance.now();
     const stream = await withTimeout(navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } }), 8000, 'getUserMedia');
@@ -441,8 +477,7 @@ $('btnHandoff').onclick = async () => {
     const tStop = performance.now();
     stream.getTracks().forEach((t) => t.stop());
     v.srcObject = null; v.style.display = 'none';
-    out.userActivationActive = navigator.userActivation ? navigator.userActivation.isActive : null;
-    ctx = await startSession({ required: [], optional: ['local-floor', 'hit-test', 'dom-overlay'] });
+    ctx = await startSession(['local-floor', 'hit-test', 'dom-overlay']);
     out.stopToSessionMs = round(performance.now() - tStop, 0);
     showOverlay('Hand-off test', 'Waiting for tracking…');
     const { session, gl, refSpace } = ctx;
@@ -465,76 +500,11 @@ $('btnHandoff').onclick = async () => {
     });
     out.ok = out.stopToFirstXrFrameMs !== undefined;
     try { await session.end(); } catch (_) {}
-  } catch (e) {
-    out.error = errInfo(e);
-    try { ctx?.session?.end(); } catch (_) {}
-  } finally {
+  } catch (e) { out.error = errInfo(e); try { ctx?.session?.end(); } catch (_) {} }
+  finally {
     hideOverlay(); $('preview').style.display = 'none';
     R.handoff = out; save(); btn.disabled = false;
-    setStatus(out.ok ? `Hand-off: ${out.stopToFirstXrFrameMs} ms to first AR frame.` : 'Hand-off failed: ' + (out.error?.message || 'no AR frame'));
-  }
-};
-
-// ---------- 4. camera-access (risky) ----------
-$('btnCam').onclick = async () => {
-  const btn = $('btnCam'); btn.disabled = true; endRequested = false;
-  R.cameraAccess = { attempted: true, crashedIfThisStaysTrue: true }; save(); // survives a tab crash
-  const out = { attempted: true, enabled: false, gotImage: false };
-  let ctx;
-  try {
-    ctx = await startSession({ required: [], optional: ['local-floor', 'camera-access', 'dom-overlay'] });
-    const { session, gl, refSpace } = ctx;
-    out.enabledFeatures = session.enabledFeatures ? Array.from(session.enabledFeatures) : null;
-    out.enabled = !!out.enabledFeatures?.includes('camera-access');
-    showOverlay('camera-access test', out.enabled ? 'Reading a camera frame…' : 'Feature not granted');
-    if (out.enabled && window.XRWebGLBinding) {
-      const binding = new XRWebGLBinding(session, gl);
-      const t0 = performance.now();
-      await new Promise((resolve) => {
-        let tries = 0;
-        const onFrame = (time, frame) => {
-          const layer = session.renderState.baseLayer;
-          gl.bindFramebuffer(gl.FRAMEBUFFER, layer.framebuffer); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-          const pose = frame.getViewerPose(refSpace);
-          if (pose) {
-            for (const view of pose.views) {
-              if (view.camera && !out.gotImage) {
-                try {
-                  const tex = binding.getCameraImage(view.camera);
-                  out.width = view.camera.width; out.height = view.camera.height;
-                  if (tex) {
-                    out.gotImage = true;
-                    out.firstImageMs = round(performance.now() - t0, 0);
-                    const fb = gl.createFramebuffer();
-                    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
-                    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
-                    out.framebufferStatusComplete = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
-                    if (out.framebufferStatusComplete) {
-                      const px = new Uint8Array(4);
-                      const t1 = performance.now();
-                      gl.readPixels(Math.floor(out.width / 2), Math.floor(out.height / 2), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
-                      out.centrePixel = Array.from(px); out.readPixelMs = round(performance.now() - t1, 2);
-                    }
-                    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.deleteFramebuffer(fb);
-                  }
-                } catch (e) { out.imageError = errInfo(e); }
-              }
-            }
-          }
-          if (out.gotImage || ++tries > 240 || endRequested) { resolve(); return; }
-          session.requestAnimationFrame(onFrame);
-        };
-        session.requestAnimationFrame(onFrame);
-      });
-    }
-    try { await session.end(); } catch (_) {}
-  } catch (e) {
-    out.error = errInfo(e);
-    try { ctx?.session?.end(); } catch (_) {}
-  } finally {
-    hideOverlay();
-    R.cameraAccess = out; save(); btn.disabled = false;
-    setStatus(out.gotImage ? 'camera-access works in AR.' : 'camera-access: ' + (out.error?.message || (out.enabled ? 'no image' : 'not available')));
+    setStatus(out.ok ? `Hand-off: ${out.stopToTrackedMs ?? out.stopToFirstXrFrameMs} ms.` : 'Hand-off failed: ' + (out.error?.message || 'no AR frame'));
   }
 };
 
@@ -542,18 +512,14 @@ $('btnCam').onclick = async () => {
 $('btnCopy').onclick = async () => {
   const text = JSON.stringify(R, null, 2);
   try { await navigator.clipboard.writeText(text); setStatus('Copied. Paste it into the chat.'); }
-  catch (_) {
-    const r = document.createRange(); r.selectNodeContents($('json'));
-    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
-    setStatus('Clipboard blocked: the text is selected, use Copy from the menu.');
-  }
+  catch (_) { const r = document.createRange(); r.selectNodeContents($('json')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); setStatus('Clipboard blocked: the text is selected, use Copy from the menu.'); }
 };
 $('btnShare').onclick = async () => {
   const text = JSON.stringify(R, null, 2);
   if (navigator.share) { try { await navigator.share({ title: 'Namma Space probe results', text }); } catch (_) {} }
   else setStatus('Sharing not supported here: use Copy.');
 };
-$('btnClear').onclick = () => { R = { version: VERSION }; try { localStorage.removeItem(STORE_KEY); } catch (_) {} render(); setStatus('Cleared.'); };
+$('btnClear').onclick = () => { R = { version: VERSION, tests: {} }; try { localStorage.removeItem(STORE_KEY); } catch (_) {} render(); setStatus('Cleared.'); };
 if (!window.isSecureContext) setStatus('Not a secure (https) page: camera and AR will not work.');
 </script>
 </body>
