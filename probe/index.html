@@ -35,7 +35,7 @@
 </head>
 <body>
 <main>
-  <h1>Namma Space · device probe v1.2</h1>
+  <h1>Namma Space · device probe v1.3</h1>
   <p class="sub">Phone check for the in-store AR guide. Use Chrome on Android. Nothing leaves the phone unless you copy or share the results.</p>
 
   <section>
@@ -52,6 +52,8 @@
     <button id="btnB">B · AR + depth, planes, light</button>
     <button id="btnC">C · AR + camera pixels (the guide's setup)</button>
     <button id="btnD">D · AR + ordinary camera opened midway</button>
+    <button id="btnE">E · AR + depth + camera pixels (Live Scan setup)</button>
+    <button id="btnF">F · same as E, depth "matchDepthView" (exact Live Scan request)</button>
   </section>
 
   <section>
@@ -76,7 +78,7 @@
 
 <script>
 'use strict';
-const VERSION = 'probe-1.2 (2026-09-14)';
+const VERSION = 'probe-1.3 (2026-09-15)';
 const $ = (id) => document.getElementById(id);
 const STORE_KEY = 'namma-probe-results';
 let R = {};
@@ -110,7 +112,7 @@ function stats(arr) {
 // ---------- summary ----------
 function li(label, value, cls) { return `<li><span>${label}</span><span class="v ${cls || ''}">${value}</span></li>`; }
 function head(label) { return `<li class="head"><span>${label}</span><span></span></li>`; }
-const TEST_LABELS = { A: 'A · basic AR', B: 'B · + depth/planes/light', C: 'C · + camera pixels', D: 'D · + ordinary camera midway' };
+const TEST_LABELS = { A: 'A · basic AR', B: 'B · + depth/planes/light', C: 'C · + camera pixels', D: 'D · + ordinary camera midway', E: 'E · depth + camera pixels', F: 'F · E + matchDepthView' };
 function render() {
   const s = [];
   const b = R.basics;
@@ -123,7 +125,7 @@ function render() {
     const rate = b.sensors && (b.sensors.gyroscope?.hz || b.sensors.deviceorientation?.hz);
     s.push(li('Gyro rate', rate ? round(rate) + ' Hz' : 'none', rate >= 50 ? 'ok' : rate ? 'warn' : 'bad'));
   }
-  for (const k of ['A', 'B', 'C', 'D']) {
+  for (const k of ['A', 'B', 'C', 'D', 'E', 'F']) {
     const t = R.tests[k];
     if (!t) continue;
     s.push(head(TEST_LABELS[k]));
@@ -132,7 +134,11 @@ function render() {
     s.push(li('Worst frames (p95 gap)', round(t.frameIntervalMs?.p95, 0) + ' ms', t.frameIntervalMs?.p95 <= 50 ? 'ok' : 'warn'));
     s.push(li('Floor found in frames', round(100 * t.hitFrameFraction, 0) + ' %', t.hitFrameFraction > 0.5 ? 'ok' : t.hitFrameFraction > 0 ? 'warn' : 'bad'));
     s.push(li('Walked (tracked)', round(t.trackedPathM, 2) + ' m', t.trackedPathM > 0.5 ? 'ok' : 'warn'));
-    if (t.depth) s.push(li('Depth valid', round(100 * t.depth.validFraction, 0) + ' %', t.depth.validFraction > 0.5 ? 'ok' : 'warn'));
+    if (t.depth) {
+      s.push(li('Depth valid', round(100 * t.depth.validFraction, 0) + ' %', t.depth.validFraction > 0.5 ? 'ok' : 'warn'));
+      s.push(li('Depth updating (changed reads)', round(100 * (1 - t.depth.staleFraction), 0) + ' %', t.depth.staleFraction < 0.5 ? 'ok' : 'bad'));
+      if (t.depth.missingReads) s.push(li('Depth missing reads', t.depth.missingReads, 'warn'));
+    } else if (t.features && t.features.includes('depth-sensing')) s.push(li('Depth', t.enabledFeatures?.includes('depth-sensing') ? 'granted, never read' : 'NOT granted', 'bad'));
     if (t.camera) {
       const c = t.camera;
       s.push(li('Camera frames read', c.images ? `${c.images} (${c.width}×${c.height})` : 'none', c.images ? 'ok' : 'bad'));
@@ -149,7 +155,7 @@ function render() {
   if (h) { s.push(head('Hand-off')); s.push(li('Camera stop → tracked AR', h.ok ? round(h.stopToTrackedMs ?? h.stopToFirstXrFrameMs, 0) + ' ms' : 'failed', h.ok ? 'ok' : 'bad')); }
   $('summary').innerHTML = s.join('') || li('Nothing run yet', '');
   $('json').textContent = JSON.stringify(R, null, 2);
-  for (const k of ['A', 'B', 'C', 'D']) $('btn' + k).classList.toggle('done', !!R.tests[k]?.sessionStarted);
+  for (const k of ['A', 'B', 'C', 'D', 'E', 'F']) $('btn' + k).classList.toggle('done', !!R.tests[k]?.sessionStarted);
 }
 render();
 
@@ -253,11 +259,11 @@ function makeGl() {
   if (!gl) throw new Error('No WebGL context');
   return gl;
 }
-async function startSession(optional) {
+async function startSession(optional, extraDepth) {
   const gl = makeGl();
   const init = { requiredFeatures: [], optionalFeatures: optional };
   if (optional.includes('dom-overlay')) init.domOverlay = { root: $('overlay') };
-  if (optional.includes('depth-sensing')) init.depthSensing = { usagePreference: ['cpu-optimized', 'gpu-optimized'], dataFormatPreference: ['luminance-alpha', 'float32'] };
+  if (optional.includes('depth-sensing')) init.depthSensing = Object.assign({ usagePreference: ['cpu-optimized', 'gpu-optimized'], dataFormatPreference: ['luminance-alpha', 'float32'] }, extraDepth || {});
   const session = await navigator.xr.requestSession('immersive-ar', init);
   try {
     session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
@@ -364,18 +370,20 @@ const TESTS = {
   B: { optional: [...BASIC, 'depth-sensing', 'plane-detection', 'light-estimation'], durationMs: 10000 },
   C: { optional: [...BASIC, 'camera-access'], durationMs: 12000 },
   D: { optional: BASIC, durationMs: 12000, cameraAt: 4000, cameraHoldMs: 3000 },
+  E: { optional: [...BASIC, 'depth-sensing', 'camera-access'], durationMs: 12000 },
+  F: { optional: [...BASIC, 'depth-sensing', 'camera-access'], durationMs: 12000, depthInit: { usagePreference: ['cpu-optimized'], dataFormatPreference: ['luminance-alpha'], matchDepthView: true } },
 };
 
 async function runArTest(key) {
   const cfg = TESTS[key];
-  const buttons = ['A', 'B', 'C', 'D'].map((k) => $('btn' + k));
+  const buttons = ['A', 'B', 'C', 'D', 'E', 'F'].map((k) => $('btn' + k));
   buttons.forEach((b) => (b.disabled = true)); endRequested = false;
   const out = { features: cfg.optional, sessionStarted: false };
   const tReq = performance.now();
   let ctx;
   try {
     if (!navigator.xr) throw Object.assign(new Error('navigator.xr missing'), { name: 'NoWebXR' });
-    ctx = await startSession(cfg.optional);
+    ctx = await startSession(cfg.optional, cfg.depthInit);
     const { session, gl, refSpace } = ctx;
     out.sessionStarted = true; out.referenceSpace = ctx.refType;
     out.enabledFeatures = session.enabledFeatures ? Array.from(session.enabledFeatures) : null;
@@ -392,7 +400,7 @@ async function runArTest(key) {
       try { cam = makeCameraReader(session, gl); } catch (e) { out.cameraReaderError = errInfo(e); }
     }
 
-    const T = { t0: null, last: null, frames: 0, emulated: 0, hitFrames: 0, planesMax: 0, intervals: [], buckets: [], positions: [], depth: [] };
+    const T = { t0: null, last: null, frames: 0, emulated: 0, hitFrames: 0, planesMax: 0, intervals: [], buckets: [], positions: [], depth: [], depthSig: null, depthReads: 0, depthStale: 0, depthMissing: 0, depthMs: [] };
     let camPromise = null;
     await new Promise((resolve) => {
       const onFrame = (time, frame) => {
@@ -410,11 +418,20 @@ async function runArTest(key) {
           if (T.frames % 5 === 0) { const p = pose.transform.position; T.positions.push([p.x, p.y, p.z]); }
           if (hitSource) { try { if (frame.getHitTestResults(hitSource).length) { bucket[1]++; T.hitFrames++; } } catch (_) {} }
           if (frame.detectedPlanes) T.planesMax = Math.max(T.planesMax, frame.detectedPlanes.size);
-          if (out.depthUsage === 'cpu-optimized' && T.frames % 15 === 0 && frame.getDepthInformation) {
+          if (out.depthUsage === 'cpu-optimized' && T.frames % 3 === 0 && frame.getDepthInformation) {
             try {
+              const td = performance.now();
               const d = frame.getDepthInformation(pose.views[0]);
-              if (d) { let valid = 0, sum = 0, n = 0; for (let i = 0; i < 8; i++) for (let j = 0; j < 5; j++) { const m = d.getDepthInMeters((i + 0.5) / 8, (j + 0.5) / 5); n++; if (m > 0) { valid++; sum += m; } } T.depth.push([valid / n, valid ? sum / valid : 0]); }
-            } catch (e) { out.depthError = errInfo(e); }
+              if (d) {
+                let valid = 0, sum = 0, n = 0, sig = '';
+                for (let i = 0; i < 8; i++) for (let j = 0; j < 5; j++) { const m = d.getDepthInMeters((i + 0.5) / 8, (j + 0.5) / 5); n++; sig += m.toFixed(3) + ','; if (m > 0) { valid++; sum += m; } }
+                T.depthMs.push(performance.now() - td); T.depthReads++;
+                if (T.depthSig === sig) T.depthStale++;
+                T.depthSig = sig;
+                if (T.frames % 15 === 0) T.depth.push([valid / n, valid ? sum / valid : 0]);
+                if (!out.depthSize) out.depthSize = [d.width, d.height];
+              } else T.depthMissing++;
+            } catch (e) { out.depthError = errInfo(e); T.depthMissing++; }
           }
           if (cam) { try { cam.onFrame(pose, T.frames); } catch (e) { out.cameraFrameError = errInfo(e); cam = null; } }
           if (cfg.cameraAt && !camPromise && elapsed > cfg.cameraAt) {
@@ -445,7 +462,8 @@ async function runArTest(key) {
     out.planesMax = T.planesMax;
     let path = 0; for (let i = 1; i < T.positions.length; i++) { const a = T.positions[i - 1], b = T.positions[i]; path += Math.hypot(b[0] - a[0], b[2] - a[2]); }
     out.trackedPathM = round(path, 3);
-    if (T.depth.length) out.depth = { samples: T.depth.length, validFraction: round(T.depth.reduce((s, d) => s + d[0], 0) / T.depth.length, 3), meanM: round(T.depth.reduce((s, d) => s + d[1], 0) / T.depth.length, 2) };
+    if (T.depth.length || T.depthReads) out.depth = { samples: T.depth.length, reads: T.depthReads, validFraction: T.depth.length ? round(T.depth.reduce((s, d) => s + d[0], 0) / T.depth.length, 3) : 0, meanM: T.depth.length ? round(T.depth.reduce((s, d) => s + d[1], 0) / T.depth.length, 2) : 0, staleFraction: T.depthReads ? round(T.depthStale / T.depthReads, 3) : 1, missingReads: T.depthMissing, readMs: stats(T.depthMs) };
+    else if (out.depthUsage) out.depth = { reads: 0, missingReads: T.depthMissing, staleFraction: 1, validFraction: 0 };
     if (cam) out.camera = cam.summary();
     if (camPromise) out.cameraDuringAr = await withTimeout(camPromise, 8000, 'camera hold').catch((e) => ({ ok: false, error: errInfo(e) }));
     try { await session.end(); } catch (_) {}
@@ -456,11 +474,11 @@ async function runArTest(key) {
     hideOverlay();
     R.tests[key] = out; save();
     buttons.forEach((b) => (b.disabled = false));
-    const next = { A: 'B', B: 'C', C: 'D', D: null }[key];
+    const next = { A: 'B', B: 'C', C: 'D', D: 'E', E: 'F', F: null }[key];
     setStatus(out.sessionStarted ? `Test ${key}: ${out.fpsMedian} fps, floor in ${Math.round(100 * out.hitFrameFraction)}% of frames.` + (next ? ` Next: test ${next}.` : ' All AR tests done — copy the results.') : `Test ${key} could not start: ${out.error?.message || 'unknown'}`);
   }
 }
-for (const k of ['A', 'B', 'C', 'D']) $('btn' + k).onclick = () => runArTest(k);
+for (const k of ['A', 'B', 'C', 'D', 'E', 'F']) $('btn' + k).onclick = () => runArTest(k);
 
 // ---------- 3. hand-off ----------
 $('btnHandoff').onclick = async () => {
