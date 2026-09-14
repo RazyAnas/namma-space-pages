@@ -35,7 +35,7 @@
 </head>
 <body>
 <main>
-  <h1>Namma Space · device probe v1.1</h1>
+  <h1>Namma Space · device probe v1.2</h1>
   <p class="sub">Phone check for the in-store AR guide. Use Chrome on Android. Nothing leaves the phone unless you copy or share the results.</p>
 
   <section>
@@ -76,7 +76,7 @@
 
 <script>
 'use strict';
-const VERSION = 'probe-1.1 (2026-09-14)';
+const VERSION = 'probe-1.2 (2026-09-14)';
 const $ = (id) => document.getElementById(id);
 const STORE_KEY = 'namma-probe-results';
 let R = {};
@@ -128,8 +128,8 @@ function render() {
     if (!t) continue;
     s.push(head(TEST_LABELS[k]));
     if (!t.sessionStarted) { s.push(li('AR start', 'failed: ' + (t.error?.name || '?'), 'bad')); continue; }
-    s.push(li('Frame rate (median)', round(t.fpsMedian) + ' fps', t.fpsMedian >= 50 ? 'ok' : t.fpsMedian >= 25 ? 'warn' : 'bad'));
-    s.push(li('Worst frames (p95 gap)', round(t.frameIntervalMs?.p95, 0) + ' ms', t.frameIntervalMs?.p95 <= 40 ? 'ok' : 'warn'));
+    s.push(li('Frame rate (median)', round(t.fpsMedian) + ' fps', t.fpsMedian >= 28 ? 'ok' : t.fpsMedian >= 20 ? 'warn' : 'bad'));
+    s.push(li('Worst frames (p95 gap)', round(t.frameIntervalMs?.p95, 0) + ' ms', t.frameIntervalMs?.p95 <= 50 ? 'ok' : 'warn'));
     s.push(li('Floor found in frames', round(100 * t.hitFrameFraction, 0) + ' %', t.hitFrameFraction > 0.5 ? 'ok' : t.hitFrameFraction > 0 ? 'warn' : 'bad'));
     s.push(li('Walked (tracked)', round(t.trackedPathM, 2) + ' m', t.trackedPathM > 0.5 ? 'ok' : 'warn'));
     if (t.depth) s.push(li('Depth valid', round(100 * t.depth.validFraction, 0) + ' %', t.depth.validFraction > 0.5 ? 'ok' : 'warn'));
@@ -379,7 +379,7 @@ async function runArTest(key) {
     const { session, gl, refSpace } = ctx;
     out.sessionStarted = true; out.referenceSpace = ctx.refType;
     out.enabledFeatures = session.enabledFeatures ? Array.from(session.enabledFeatures) : null;
-    out.depthUsage = session.depthUsage ?? null;
+    try { out.depthUsage = session.depthUsage ?? null; } catch (_) { out.depthUsage = null; } // throws when depth-sensing is not enabled
     out.sessionFrameRate = session.frameRate ?? null;
     out.supportedFrameRates = session.supportedFrameRates ? Array.from(session.supportedFrameRates) : null;
     showOverlay('Aim at the floor and walk slowly forward', 'Test ' + key);
