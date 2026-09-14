@@ -1,0 +1,48 @@
+{
+ "schema": "namma.manifest/1",
+ "storeId": "demo-mart",
+ "name": "Demo Mega Mart (synthetic)",
+ "createdAt": "2026-09-14T09:00:00Z",
+ "frame": {
+  "units": "m",
+  "up": "+Y",
+  "origin": "marker:0"
+ },
+ "scene": {
+  "format": "ply",
+  "url": "",
+  "lod": false,
+  "splatCount": 0,
+  "bbox": {
+   "min": [
+    -6.2,
+    0.0,
+    -19.0
+   ],
+   "max": [
+    24.2,
+    3.0,
+    1.4
+   ]
+  }
+ },
+ "navgrid": {
+  "url": "navgrid.bin",
+  "agentRadiusMm": 350
+ },
+ "pois": "pois.json",
+ "markers": "markers.json",
+ "spawn": {
+  "position": [
+   0.0,
+   1.6,
+   1.0
+  ],
+  "yaw": 0.0
+ },
+ "quality": {},
+ "pipeline": {
+  "version": "sim.store_gen/0.1",
+  "stages": []
+ }
+}

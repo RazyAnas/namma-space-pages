@@ -1,0 +1,96 @@
+{
+  "schema": "namma.manifest/1",
+  "storeId": "bodega",
+  "name": "bodega",
+  "createdAt": "2026-09-13T20:41:48Z",
+  "frame": {
+    "units": "unscaled",
+    "up": "+Y",
+    "origin": "first-camera",
+    "note": "unscaled: no markers; camera height assumed 1.4 m"
+  },
+  "scene": {
+    "format": "sog",
+    "url": "scene/scene.sog",
+    "lod": false,
+    "splatCount": 792303,
+    "bbox": {
+      "min": [
+        -10.939,
+        -0.07,
+        -10.375
+      ],
+      "max": [
+        -1.416,
+        3.525,
+        6.159
+      ]
+    }
+  },
+  "navgrid": {
+    "url": "navgrid.bin",
+    "agentRadiusMm": 350
+  },
+  "pois": "pois.json",
+  "markers": "markers.json",
+  "spawn": {
+    "position": [
+      0.0,
+      1.6,
+      1.0
+    ],
+    "yaw": 0.0
+  },
+  "quality": {
+    "scaleErrorPct": null,
+    "markerResidualM": null,
+    "psnr": 14.91,
+    "registeredFrames": "150/150",
+    "floorTiltDeg": null,
+    "walkableM2": 1.9
+  },
+  "notes": [
+    "unscaled"
+  ],
+  "pipeline": {
+    "version": "0.1.0",
+    "stages": [
+      {
+        "name": "frames",
+        "seconds": 2.5,
+        "peakRssMb": 285,
+        "diskMb": 0.0
+      },
+      {
+        "name": "sfm",
+        "seconds": 523.3,
+        "peakRssMb": 3535,
+        "diskMb": 222.6
+      },
+      {
+        "name": "metric",
+        "seconds": 0.4,
+        "peakRssMb": 1550,
+        "diskMb": 26.9
+      },
+      {
+        "name": "splat",
+        "seconds": 576.4,
+        "peakRssMb": 3509,
+        "diskMb": 200.6
+      },
+      {
+        "name": "grid",
+        "seconds": 0.4,
+        "peakRssMb": 520,
+        "diskMb": 0.4
+      },
+      {
+        "name": "publish",
+        "seconds": 0.1,
+        "peakRssMb": 351,
+        "diskMb": 0.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";document.getElementById("app").innerHTML='<p style="font:18px system-ui;padding:24px">The device probe moved to <code>deploy/pages/probe</code> (GitHub Pages). This page is intentionally empty.</p>';

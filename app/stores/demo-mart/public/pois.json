@@ -1,0 +1,3417 @@
+{
+ "schema": "namma.pois/1",
+ "storeId": "demo-mart",
+ "updatedAt": "2026-09-14T09:00:00Z",
+ "pois": [
+  {
+   "id": "poi_oats_01",
+   "name": "Oats",
+   "kind": "product",
+   "aliases": [
+    "rolled oats",
+    "oatmeal",
+    "jai",
+    "quaker oats",
+    "saffola oats"
+   ],
+   "categories": [
+    "breakfast",
+    "cereals"
+   ],
+   "position": [
+    2.9,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    3.275,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_cornflakes_01",
+   "name": "Cornflakes",
+   "kind": "product",
+   "aliases": [
+    "corn flakes",
+    "kelloggs",
+    "cereal"
+   ],
+   "categories": [
+    "breakfast",
+    "cereals"
+   ],
+   "position": [
+    2.9,
+    1.1,
+    -7.7
+   ],
+   "approach": [
+    3.275,
+    -7.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_poha_01",
+   "name": "Poha",
+   "kind": "product",
+   "aliases": [
+    "flattened rice",
+    "pohe",
+    "aval",
+    "avalakki",
+    "chiwda rice"
+   ],
+   "categories": [
+    "breakfast",
+    "staples"
+   ],
+   "position": [
+    2.9,
+    0.7,
+    -5.7
+   ],
+   "approach": [
+    3.275,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 2,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_rava_01",
+   "name": "Rava (Sooji)",
+   "kind": "product",
+   "aliases": [
+    "sooji",
+    "suji",
+    "semolina",
+    "upma rava",
+    "bombay rava"
+   ],
+   "categories": [
+    "breakfast",
+    "staples"
+   ],
+   "position": [
+    2.9,
+    0.7,
+    -9.7
+   ],
+   "approach": [
+    3.275,
+    -9.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_vermicelli_01",
+   "name": "Vermicelli",
+   "kind": "product",
+   "aliases": [
+    "seviyan",
+    "semiya",
+    "shavige"
+   ],
+   "categories": [
+    "breakfast"
+   ],
+   "position": [
+    2.9,
+    0.7,
+    -10.7
+   ],
+   "approach": [
+    3.275,
+    -10.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 7,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_honey_01",
+   "name": "Honey",
+   "kind": "product",
+   "aliases": [
+    "shahad",
+    "madhu",
+    "dabur honey"
+   ],
+   "categories": [
+    "breakfast",
+    "spreads"
+   ],
+   "position": [
+    2.9,
+    1.1,
+    -11.7
+   ],
+   "approach": [
+    3.275,
+    -11.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 8,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_tea_01",
+   "name": "Tea",
+   "kind": "product",
+   "aliases": [
+    "chai",
+    "chai patti",
+    "tea leaves",
+    "tata tea",
+    "red label"
+   ],
+   "categories": [
+    "beverages",
+    "tea & coffee"
+   ],
+   "position": [
+    4.7,
+    1.1,
+    -5.7
+   ],
+   "approach": [
+    4.325,
+    -5.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_green_tea_01",
+   "name": "Green Tea",
+   "kind": "product",
+   "aliases": [
+    "green tea bags",
+    "lipton green tea"
+   ],
+   "categories": [
+    "beverages",
+    "tea & coffee"
+   ],
+   "position": [
+    4.7,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    4.325,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_coffee_01",
+   "name": "Coffee",
+   "kind": "product",
+   "aliases": [
+    "instant coffee",
+    "nescafe",
+    "bru",
+    "filter coffee",
+    "kaapi"
+   ],
+   "categories": [
+    "beverages",
+    "tea & coffee"
+   ],
+   "position": [
+    4.7,
+    1.1,
+    -7.7
+   ],
+   "approach": [
+    4.325,
+    -7.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_health_drink_01",
+   "name": "Health Drinks",
+   "kind": "product",
+   "aliases": [
+    "bournvita",
+    "horlicks",
+    "boost",
+    "malt drink"
+   ],
+   "categories": [
+    "beverages"
+   ],
+   "position": [
+    4.7,
+    1.1,
+    -9.7
+   ],
+   "approach": [
+    4.325,
+    -9.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A1",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_atta_01",
+   "name": "Wheat Atta",
+   "kind": "product",
+   "aliases": [
+    "atta",
+    "aata",
+    "gehun ka atta",
+    "wheat flour",
+    "chakki atta",
+    "aashirvaad"
+   ],
+   "categories": [
+    "staples",
+    "flours"
+   ],
+   "position": [
+    5.9,
+    0.3,
+    -5.7
+   ],
+   "approach": [
+    6.275,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 2,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_maida_01",
+   "name": "Maida",
+   "kind": "product",
+   "aliases": [
+    "refined flour",
+    "all purpose flour",
+    "plain flour"
+   ],
+   "categories": [
+    "staples",
+    "flours"
+   ],
+   "position": [
+    5.9,
+    0.7,
+    -6.7
+   ],
+   "approach": [
+    6.275,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 3,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_besan_01",
+   "name": "Besan",
+   "kind": "product",
+   "aliases": [
+    "gram flour",
+    "chickpea flour",
+    "chana atta"
+   ],
+   "categories": [
+    "staples",
+    "flours"
+   ],
+   "position": [
+    5.9,
+    0.7,
+    -7.7
+   ],
+   "approach": [
+    6.275,
+    -7.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 4,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_ragi_flour_01",
+   "name": "Ragi Flour",
+   "kind": "product",
+   "aliases": [
+    "nachni",
+    "finger millet",
+    "ragi hittu",
+    "ragi atta"
+   ],
+   "categories": [
+    "staples",
+    "flours"
+   ],
+   "position": [
+    5.9,
+    0.7,
+    -9.7
+   ],
+   "approach": [
+    6.275,
+    -9.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_basmati_rice_01",
+   "name": "Basmati Rice",
+   "kind": "product",
+   "aliases": [
+    "chawal",
+    "basmati chawal",
+    "india gate",
+    "rice"
+   ],
+   "categories": [
+    "staples",
+    "rice"
+   ],
+   "position": [
+    7.9,
+    0.3,
+    -5.7
+   ],
+   "approach": [
+    7.525,
+    -5.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 2,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_sona_masoori_01",
+   "name": "Sona Masoori Rice",
+   "kind": "product",
+   "aliases": [
+    "sona masuri",
+    "rice",
+    "chawal",
+    "akki"
+   ],
+   "categories": [
+    "staples",
+    "rice"
+   ],
+   "position": [
+    7.9,
+    0.3,
+    -6.7
+   ],
+   "approach": [
+    7.525,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 3,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_toor_dal_01",
+   "name": "Toor Dal",
+   "kind": "product",
+   "aliases": [
+    "arhar dal",
+    "tuvar dal",
+    "pigeon pea",
+    "togari bele",
+    "dal"
+   ],
+   "categories": [
+    "staples",
+    "dals & pulses"
+   ],
+   "position": [
+    7.9,
+    0.7,
+    -8.7
+   ],
+   "approach": [
+    7.525,
+    -8.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 5,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_moong_dal_01",
+   "name": "Moong Dal",
+   "kind": "product",
+   "aliases": [
+    "mung dal",
+    "yellow moong",
+    "hesaru bele",
+    "dal"
+   ],
+   "categories": [
+    "staples",
+    "dals & pulses"
+   ],
+   "position": [
+    7.9,
+    0.7,
+    -9.7
+   ],
+   "approach": [
+    7.525,
+    -9.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_urad_dal_01",
+   "name": "Urad Dal",
+   "kind": "product",
+   "aliases": [
+    "black gram",
+    "udad dal",
+    "uddina bele"
+   ],
+   "categories": [
+    "staples",
+    "dals & pulses"
+   ],
+   "position": [
+    7.9,
+    0.7,
+    -10.7
+   ],
+   "approach": [
+    7.525,
+    -10.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 7,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_masoor_dal_01",
+   "name": "Masoor Dal",
+   "kind": "product",
+   "aliases": [
+    "red lentils",
+    "masoor"
+   ],
+   "categories": [
+    "staples",
+    "dals & pulses"
+   ],
+   "position": [
+    7.9,
+    1.1,
+    -10.7
+   ],
+   "approach": [
+    7.525,
+    -10.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 7,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_rajma_01",
+   "name": "Rajma",
+   "kind": "product",
+   "aliases": [
+    "kidney beans",
+    "red kidney beans"
+   ],
+   "categories": [
+    "staples",
+    "dals & pulses"
+   ],
+   "position": [
+    7.9,
+    0.7,
+    -11.7
+   ],
+   "approach": [
+    7.525,
+    -11.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 8,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_kabuli_chana_01",
+   "name": "Kabuli Chana",
+   "kind": "product",
+   "aliases": [
+    "chole",
+    "chickpeas",
+    "safed chana"
+   ],
+   "categories": [
+    "staples",
+    "dals & pulses"
+   ],
+   "position": [
+    7.9,
+    0.7,
+    -12.7
+   ],
+   "approach": [
+    7.525,
+    -12.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A2",
+    "bay": 9,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_salt_01",
+   "name": "Salt",
+   "kind": "product",
+   "aliases": [
+    "namak",
+    "tata salt",
+    "iodised salt",
+    "uppu"
+   ],
+   "categories": [
+    "staples",
+    "spices"
+   ],
+   "position": [
+    9.1,
+    0.7,
+    -5.7
+   ],
+   "approach": [
+    9.475,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 2,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_sugar_01",
+   "name": "Sugar",
+   "kind": "product",
+   "aliases": [
+    "cheeni",
+    "chini",
+    "shakkar",
+    "sakkare"
+   ],
+   "categories": [
+    "staples"
+   ],
+   "position": [
+    9.1,
+    0.3,
+    -6.7
+   ],
+   "approach": [
+    9.475,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 3,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_jaggery_01",
+   "name": "Jaggery",
+   "kind": "product",
+   "aliases": [
+    "gur",
+    "bella",
+    "vellam"
+   ],
+   "categories": [
+    "staples"
+   ],
+   "position": [
+    9.1,
+    0.7,
+    -6.7
+   ],
+   "approach": [
+    9.475,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 3,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_haldi_01",
+   "name": "Turmeric Powder",
+   "kind": "product",
+   "aliases": [
+    "haldi",
+    "turmeric",
+    "haldi powder",
+    "arishina"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    1.1,
+    -8.7
+   ],
+   "approach": [
+    9.475,
+    -8.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 5,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_jeera_01",
+   "name": "Cumin Seeds",
+   "kind": "product",
+   "aliases": [
+    "jeera",
+    "zeera",
+    "cumin",
+    "jeerige"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    0.7,
+    -8.7
+   ],
+   "approach": [
+    9.475,
+    -8.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 5,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_chilli_powder_01",
+   "name": "Red Chilli Powder",
+   "kind": "product",
+   "aliases": [
+    "lal mirch",
+    "mirchi powder",
+    "chilli powder"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    1.1,
+    -9.7
+   ],
+   "approach": [
+    9.475,
+    -9.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_dhania_powder_01",
+   "name": "Coriander Powder",
+   "kind": "product",
+   "aliases": [
+    "dhania powder",
+    "dhaniya",
+    "coriander"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    0.7,
+    -9.7
+   ],
+   "approach": [
+    9.475,
+    -9.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_garam_masala_01",
+   "name": "Garam Masala",
+   "kind": "product",
+   "aliases": [
+    "masala",
+    "everest",
+    "mdh masala"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    1.1,
+    -10.7
+   ],
+   "approach": [
+    9.475,
+    -10.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 7,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_mustard_seeds_01",
+   "name": "Mustard Seeds",
+   "kind": "product",
+   "aliases": [
+    "rai",
+    "sarson",
+    "sasive"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    0.7,
+    -10.7
+   ],
+   "approach": [
+    9.475,
+    -10.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 7,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_sambar_powder_01",
+   "name": "Sambar Powder",
+   "kind": "product",
+   "aliases": [
+    "sambar masala",
+    "mtr sambar"
+   ],
+   "categories": [
+    "spices"
+   ],
+   "position": [
+    9.1,
+    1.1,
+    -11.7
+   ],
+   "approach": [
+    9.475,
+    -11.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 8,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_sunflower_oil_01",
+   "name": "Sunflower Oil",
+   "kind": "product",
+   "aliases": [
+    "cooking oil",
+    "refined oil",
+    "fortune oil",
+    "tel"
+   ],
+   "categories": [
+    "oils & ghee"
+   ],
+   "position": [
+    10.7,
+    0.3,
+    -5.7
+   ],
+   "approach": [
+    10.325,
+    -5.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 2,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_groundnut_oil_01",
+   "name": "Groundnut Oil",
+   "kind": "product",
+   "aliases": [
+    "peanut oil",
+    "moongphali tel",
+    "kadalekai enne"
+   ],
+   "categories": [
+    "oils & ghee"
+   ],
+   "position": [
+    10.7,
+    0.3,
+    -6.7
+   ],
+   "approach": [
+    10.325,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 3,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_mustard_oil_01",
+   "name": "Mustard Oil",
+   "kind": "product",
+   "aliases": [
+    "sarson ka tel",
+    "kachi ghani"
+   ],
+   "categories": [
+    "oils & ghee"
+   ],
+   "position": [
+    10.7,
+    0.3,
+    -7.7
+   ],
+   "approach": [
+    10.325,
+    -7.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 4,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_ghee_01",
+   "name": "Ghee",
+   "kind": "product",
+   "aliases": [
+    "desi ghee",
+    "amul ghee",
+    "clarified butter",
+    "tuppa"
+   ],
+   "categories": [
+    "oils & ghee",
+    "dairy"
+   ],
+   "position": [
+    10.7,
+    0.7,
+    -8.7
+   ],
+   "approach": [
+    10.325,
+    -8.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 5,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_coconut_oil_01",
+   "name": "Coconut Oil",
+   "kind": "product",
+   "aliases": [
+    "nariyal tel",
+    "parachute"
+   ],
+   "categories": [
+    "oils & ghee"
+   ],
+   "position": [
+    10.7,
+    0.7,
+    -9.7
+   ],
+   "approach": [
+    10.325,
+    -9.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_cashews_01",
+   "name": "Cashews",
+   "kind": "product",
+   "aliases": [
+    "kaju",
+    "cashew nuts",
+    "dry fruits"
+   ],
+   "categories": [
+    "dry fruits"
+   ],
+   "position": [
+    10.7,
+    1.1,
+    -11.7
+   ],
+   "approach": [
+    10.325,
+    -11.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 8,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_almonds_01",
+   "name": "Almonds",
+   "kind": "product",
+   "aliases": [
+    "badam",
+    "dry fruits"
+   ],
+   "categories": [
+    "dry fruits"
+   ],
+   "position": [
+    10.7,
+    1.1,
+    -12.7
+   ],
+   "approach": [
+    10.325,
+    -12.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A3",
+    "bay": 9,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_biscuits_01",
+   "name": "Biscuits",
+   "kind": "product",
+   "aliases": [
+    "cookies",
+    "britannia",
+    "good day",
+    "marie"
+   ],
+   "categories": [
+    "snacks",
+    "biscuits"
+   ],
+   "position": [
+    11.9,
+    1.1,
+    -5.7
+   ],
+   "approach": [
+    12.275,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_parle_g_01",
+   "name": "Parle-G",
+   "kind": "product",
+   "aliases": [
+    "parle g",
+    "glucose biscuit"
+   ],
+   "categories": [
+    "snacks",
+    "biscuits"
+   ],
+   "position": [
+    11.9,
+    0.7,
+    -5.7
+   ],
+   "approach": [
+    12.275,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 2,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_cream_biscuits_01",
+   "name": "Cream Biscuits",
+   "kind": "product",
+   "aliases": [
+    "oreo",
+    "bourbon",
+    "hide and seek"
+   ],
+   "categories": [
+    "snacks",
+    "biscuits"
+   ],
+   "position": [
+    11.9,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    12.275,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_rusk_01",
+   "name": "Rusk",
+   "kind": "product",
+   "aliases": [
+    "toast",
+    "khari",
+    "toast rusk"
+   ],
+   "categories": [
+    "snacks",
+    "biscuits"
+   ],
+   "position": [
+    11.9,
+    0.7,
+    -7.7
+   ],
+   "approach": [
+    12.275,
+    -7.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 4,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_chocolates_01",
+   "name": "Chocolates",
+   "kind": "product",
+   "aliases": [
+    "dairy milk",
+    "cadbury",
+    "kitkat",
+    "chocolate"
+   ],
+   "categories": [
+    "snacks",
+    "confectionery"
+   ],
+   "position": [
+    11.9,
+    1.1,
+    -8.7
+   ],
+   "approach": [
+    12.275,
+    -8.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 5,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_namkeen_01",
+   "name": "Namkeen",
+   "kind": "product",
+   "aliases": [
+    "bhujia",
+    "haldiram",
+    "mixture",
+    "farsan",
+    "chivda"
+   ],
+   "categories": [
+    "snacks"
+   ],
+   "position": [
+    11.9,
+    1.1,
+    -10.7
+   ],
+   "approach": [
+    12.275,
+    -10.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 7,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_chips_01",
+   "name": "Chips",
+   "kind": "product",
+   "aliases": [
+    "lays",
+    "wafers",
+    "potato chips",
+    "kurkure"
+   ],
+   "categories": [
+    "snacks"
+   ],
+   "position": [
+    11.9,
+    1.1,
+    -11.7
+   ],
+   "approach": [
+    12.275,
+    -11.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 8,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_maggi_01",
+   "name": "Maggi Noodles",
+   "kind": "product",
+   "aliases": [
+    "maggi",
+    "instant noodles",
+    "2 minute noodles",
+    "noodles"
+   ],
+   "categories": [
+    "instant food"
+   ],
+   "position": [
+    14.1,
+    1.1,
+    -5.7
+   ],
+   "approach": [
+    13.725,
+    -5.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_pasta_01",
+   "name": "Pasta",
+   "kind": "product",
+   "aliases": [
+    "macaroni",
+    "penne"
+   ],
+   "categories": [
+    "instant food"
+   ],
+   "position": [
+    14.1,
+    0.7,
+    -6.7
+   ],
+   "approach": [
+    13.725,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 3,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_ketchup_01",
+   "name": "Tomato Ketchup",
+   "kind": "product",
+   "aliases": [
+    "ketchup",
+    "tomato sauce",
+    "kissan",
+    "sauce"
+   ],
+   "categories": [
+    "sauces & spreads"
+   ],
+   "position": [
+    14.1,
+    1.1,
+    -7.7
+   ],
+   "approach": [
+    13.725,
+    -7.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_pickle_01",
+   "name": "Pickle",
+   "kind": "product",
+   "aliases": [
+    "achar",
+    "aam ka achar",
+    "mango pickle",
+    "uppinakayi"
+   ],
+   "categories": [
+    "sauces & spreads"
+   ],
+   "position": [
+    14.1,
+    0.7,
+    -8.7
+   ],
+   "approach": [
+    13.725,
+    -8.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 5,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_ready_to_eat_01",
+   "name": "Ready to Eat",
+   "kind": "product",
+   "aliases": [
+    "mtr ready meals",
+    "instant food",
+    "ready meals"
+   ],
+   "categories": [
+    "instant food"
+   ],
+   "position": [
+    14.1,
+    1.1,
+    -9.7
+   ],
+   "approach": [
+    13.725,
+    -9.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_papad_01",
+   "name": "Papad",
+   "kind": "product",
+   "aliases": [
+    "papadum",
+    "appalam",
+    "happala"
+   ],
+   "categories": [
+    "snacks"
+   ],
+   "position": [
+    14.1,
+    0.7,
+    -10.7
+   ],
+   "approach": [
+    13.725,
+    -10.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A4",
+    "bay": 7,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_soft_drinks_01",
+   "name": "Soft Drinks",
+   "kind": "product",
+   "aliases": [
+    "cold drink",
+    "coke",
+    "pepsi",
+    "thums up",
+    "soda"
+   ],
+   "categories": [
+    "beverages"
+   ],
+   "position": [
+    15.3,
+    0.7,
+    -5.7
+   ],
+   "approach": [
+    15.675,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A5",
+    "bay": 2,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_fruit_juice_01",
+   "name": "Fruit Juice",
+   "kind": "product",
+   "aliases": [
+    "juice",
+    "real juice",
+    "tropicana",
+    "frooti"
+   ],
+   "categories": [
+    "beverages"
+   ],
+   "position": [
+    15.3,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    15.675,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A5",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_water_01",
+   "name": "Packaged Water",
+   "kind": "product",
+   "aliases": [
+    "mineral water",
+    "bisleri",
+    "water bottle",
+    "paani"
+   ],
+   "categories": [
+    "beverages"
+   ],
+   "position": [
+    15.3,
+    0.3,
+    -7.7
+   ],
+   "approach": [
+    15.675,
+    -7.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A5",
+    "bay": 4,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_diapers_01",
+   "name": "Diapers",
+   "kind": "product",
+   "aliases": [
+    "nappies",
+    "pampers",
+    "huggies",
+    "baby diapers"
+   ],
+   "categories": [
+    "baby care"
+   ],
+   "position": [
+    17.1,
+    0.7,
+    -6.7
+   ],
+   "approach": [
+    16.725,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A5",
+    "bay": 3,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_baby_food_01",
+   "name": "Baby Food",
+   "kind": "product",
+   "aliases": [
+    "cerelac",
+    "infant formula",
+    "lactogen"
+   ],
+   "categories": [
+    "baby care"
+   ],
+   "position": [
+    17.1,
+    1.1,
+    -7.7
+   ],
+   "approach": [
+    16.725,
+    -7.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A5",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_sanitary_pads_01",
+   "name": "Sanitary Pads",
+   "kind": "product",
+   "aliases": [
+    "whisper",
+    "stayfree",
+    "pads",
+    "sanitary napkins"
+   ],
+   "categories": [
+    "personal care"
+   ],
+   "position": [
+    17.1,
+    1.1,
+    -10.7
+   ],
+   "approach": [
+    16.725,
+    -10.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A5",
+    "bay": 7,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_toothpaste_01",
+   "name": "Toothpaste",
+   "kind": "product",
+   "aliases": [
+    "colgate",
+    "pepsodent",
+    "closeup",
+    "dant manjan"
+   ],
+   "categories": [
+    "personal care",
+    "oral care"
+   ],
+   "position": [
+    18.3,
+    1.1,
+    -5.7
+   ],
+   "approach": [
+    18.675,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_toothbrush_01",
+   "name": "Toothbrush",
+   "kind": "product",
+   "aliases": [
+    "brush",
+    "tooth brush"
+   ],
+   "categories": [
+    "personal care",
+    "oral care"
+   ],
+   "position": [
+    18.3,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    18.675,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_shampoo_01",
+   "name": "Shampoo",
+   "kind": "product",
+   "aliases": [
+    "clinic plus",
+    "head and shoulders",
+    "hair wash"
+   ],
+   "categories": [
+    "personal care",
+    "hair care"
+   ],
+   "position": [
+    18.3,
+    1.1,
+    -8.7
+   ],
+   "approach": [
+    18.675,
+    -8.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 5,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_hair_oil_01",
+   "name": "Hair Oil",
+   "kind": "product",
+   "aliases": [
+    "baal ka tel",
+    "bajaj almond drops",
+    "coconut hair oil"
+   ],
+   "categories": [
+    "personal care",
+    "hair care"
+   ],
+   "position": [
+    18.3,
+    1.1,
+    -9.7
+   ],
+   "approach": [
+    18.675,
+    -9.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_soap_01",
+   "name": "Bath Soap",
+   "kind": "product",
+   "aliases": [
+    "soap",
+    "sabun",
+    "lifebuoy",
+    "lux",
+    "dettol soap"
+   ],
+   "categories": [
+    "personal care",
+    "bath"
+   ],
+   "position": [
+    20.2,
+    1.1,
+    -5.7
+   ],
+   "approach": [
+    19.825,
+    -5.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_handwash_01",
+   "name": "Handwash",
+   "kind": "product",
+   "aliases": [
+    "hand wash",
+    "liquid soap",
+    "dettol handwash"
+   ],
+   "categories": [
+    "personal care",
+    "bath"
+   ],
+   "position": [
+    20.2,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    19.825,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_face_wash_01",
+   "name": "Face Wash",
+   "kind": "product",
+   "aliases": [
+    "facewash",
+    "himalaya face wash"
+   ],
+   "categories": [
+    "personal care",
+    "skin care"
+   ],
+   "position": [
+    20.2,
+    1.1,
+    -7.7
+   ],
+   "approach": [
+    19.825,
+    -7.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_deodorant_01",
+   "name": "Deodorant",
+   "kind": "product",
+   "aliases": [
+    "deo",
+    "body spray",
+    "axe"
+   ],
+   "categories": [
+    "personal care"
+   ],
+   "position": [
+    20.2,
+    1.1,
+    -9.7
+   ],
+   "approach": [
+    19.825,
+    -9.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A6",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_detergent_powder_01",
+   "name": "Detergent Powder",
+   "kind": "product",
+   "aliases": [
+    "washing powder",
+    "surf excel",
+    "tide",
+    "ariel",
+    "kapde dhone ka powder"
+   ],
+   "categories": [
+    "home care",
+    "laundry"
+   ],
+   "position": [
+    21.4,
+    0.3,
+    -5.7
+   ],
+   "approach": [
+    21.775,
+    -5.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 2,
+    "level": 1
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_liquid_detergent_01",
+   "name": "Liquid Detergent",
+   "kind": "product",
+   "aliases": [
+    "washing liquid",
+    "surf excel matic"
+   ],
+   "categories": [
+    "home care",
+    "laundry"
+   ],
+   "position": [
+    21.4,
+    0.7,
+    -6.7
+   ],
+   "approach": [
+    21.775,
+    -6.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 3,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_detergent_bar_01",
+   "name": "Detergent Bar",
+   "kind": "product",
+   "aliases": [
+    "washing soap",
+    "rin bar",
+    "kapde ka sabun"
+   ],
+   "categories": [
+    "home care",
+    "laundry"
+   ],
+   "position": [
+    21.4,
+    0.7,
+    -7.7
+   ],
+   "approach": [
+    21.775,
+    -7.725
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 4,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_dishwash_bar_01",
+   "name": "Dishwash Bar",
+   "kind": "product",
+   "aliases": [
+    "vim bar",
+    "bartan sabun",
+    "utensil soap",
+    "dish bar"
+   ],
+   "categories": [
+    "home care",
+    "kitchen cleaning"
+   ],
+   "position": [
+    23.4,
+    0.7,
+    -5.7
+   ],
+   "approach": [
+    23.025,
+    -5.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 2,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_dishwash_liquid_01",
+   "name": "Dishwash Liquid",
+   "kind": "product",
+   "aliases": [
+    "vim liquid",
+    "pril",
+    "dish soap"
+   ],
+   "categories": [
+    "home care",
+    "kitchen cleaning"
+   ],
+   "position": [
+    23.4,
+    1.1,
+    -6.7
+   ],
+   "approach": [
+    23.025,
+    -6.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_floor_cleaner_01",
+   "name": "Floor Cleaner",
+   "kind": "product",
+   "aliases": [
+    "lizol",
+    "phenyl",
+    "pocha liquid"
+   ],
+   "categories": [
+    "home care"
+   ],
+   "position": [
+    23.4,
+    0.7,
+    -8.7
+   ],
+   "approach": [
+    23.025,
+    -8.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 5,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_toilet_cleaner_01",
+   "name": "Toilet Cleaner",
+   "kind": "product",
+   "aliases": [
+    "harpic",
+    "toilet cleaner"
+   ],
+   "categories": [
+    "home care"
+   ],
+   "position": [
+    23.4,
+    0.7,
+    -9.7
+   ],
+   "approach": [
+    23.025,
+    -9.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_mosquito_repellent_01",
+   "name": "Mosquito Repellent",
+   "kind": "product",
+   "aliases": [
+    "good knight",
+    "all out",
+    "mortein",
+    "machhar"
+   ],
+   "categories": [
+    "home care"
+   ],
+   "position": [
+    23.4,
+    1.1,
+    -11.7
+   ],
+   "approach": [
+    23.025,
+    -11.725
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "A7",
+    "bay": 8,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_milk_01",
+   "name": "Milk",
+   "kind": "product",
+   "aliases": [
+    "doodh",
+    "amul milk",
+    "nandini milk",
+    "toned milk",
+    "haalu"
+   ],
+   "categories": [
+    "dairy"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -4.0
+   ],
+   "approach": [
+    -5.025,
+    -4.025
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "D",
+    "bay": 1,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_curd_01",
+   "name": "Curd",
+   "kind": "product",
+   "aliases": [
+    "dahi",
+    "yogurt",
+    "mosaru",
+    "thayir"
+   ],
+   "categories": [
+    "dairy"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -5.4
+   ],
+   "approach": [
+    -5.025,
+    -5.375
+   ],
+   "facing": 1.5042,
+   "shelf": {
+    "aisle": "D",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_paneer_01",
+   "name": "Paneer",
+   "kind": "product",
+   "aliases": [
+    "cottage cheese"
+   ],
+   "categories": [
+    "dairy"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -6.8
+   ],
+   "approach": [
+    -5.025,
+    -6.825
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "D",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_amul_butter_01",
+   "name": "Amul Butter",
+   "kind": "product",
+   "aliases": [
+    "butter",
+    "makhan",
+    "amul"
+   ],
+   "categories": [
+    "dairy"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -8.2
+   ],
+   "approach": [
+    -5.025,
+    -8.175
+   ],
+   "facing": 1.5042,
+   "shelf": {
+    "aisle": "D",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_cheese_01",
+   "name": "Cheese",
+   "kind": "product",
+   "aliases": [
+    "cheese slices",
+    "amul cheese"
+   ],
+   "categories": [
+    "dairy"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -9.6
+   ],
+   "approach": [
+    -5.025,
+    -9.625
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "D",
+    "bay": 5,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_eggs_01",
+   "name": "Eggs",
+   "kind": "product",
+   "aliases": [
+    "anda",
+    "ande",
+    "egg tray",
+    "motte"
+   ],
+   "categories": [
+    "dairy",
+    "eggs"
+   ],
+   "position": [
+    -5.4,
+    0.7,
+    -11.0
+   ],
+   "approach": [
+    -5.025,
+    -11.025
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "D",
+    "bay": 6,
+    "level": 2
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_bread_01",
+   "name": "Bread",
+   "kind": "product",
+   "aliases": [
+    "double roti",
+    "brown bread",
+    "sandwich bread"
+   ],
+   "categories": [
+    "bakery"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -13.8
+   ],
+   "approach": [
+    -5.025,
+    -13.825
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "D",
+    "bay": 8,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_pav_01",
+   "name": "Pav",
+   "kind": "product",
+   "aliases": [
+    "ladi pav",
+    "bun",
+    "buns"
+   ],
+   "categories": [
+    "bakery"
+   ],
+   "position": [
+    -5.4,
+    1.1,
+    -15.2
+   ],
+   "approach": [
+    -5.025,
+    -15.175
+   ],
+   "facing": 1.5042,
+   "shelf": {
+    "aisle": "D",
+    "bay": 9,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_ice_cream_01",
+   "name": "Ice Cream",
+   "kind": "product",
+   "aliases": [
+    "kulfi",
+    "amul ice cream",
+    "icecream"
+   ],
+   "categories": [
+    "frozen"
+   ],
+   "position": [
+    10.2,
+    0.8,
+    -18.2
+   ],
+   "approach": [
+    10.175,
+    -17.825
+   ],
+   "facing": -0.0666,
+   "shelf": {
+    "aisle": "F",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_frozen_peas_01",
+   "name": "Frozen Peas",
+   "kind": "product",
+   "aliases": [
+    "matar",
+    "green peas"
+   ],
+   "categories": [
+    "frozen",
+    "vegetables"
+   ],
+   "position": [
+    19.2,
+    0.8,
+    -18.2
+   ],
+   "approach": [
+    19.175,
+    -17.825
+   ],
+   "facing": -0.0666,
+   "shelf": {
+    "aisle": "F",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_bananas_01",
+   "name": "Bananas",
+   "kind": "product",
+   "aliases": [
+    "kela",
+    "banana",
+    "bale hannu"
+   ],
+   "categories": [
+    "fruits",
+    "produce"
+   ],
+   "position": [
+    -2.75,
+    0.9,
+    -6.8
+   ],
+   "approach": [
+    -2.775,
+    -6.425
+   ],
+   "facing": -0.0666,
+   "shelf": {
+    "aisle": "P",
+    "bay": 1,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_apples_01",
+   "name": "Apples",
+   "kind": "product",
+   "aliases": [
+    "seb",
+    "apple"
+   ],
+   "categories": [
+    "fruits",
+    "produce"
+   ],
+   "position": [
+    -0.5,
+    0.9,
+    -7.8
+   ],
+   "approach": [
+    -0.125,
+    -7.825
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "P",
+    "bay": 2,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_onions_01",
+   "name": "Onions",
+   "kind": "product",
+   "aliases": [
+    "pyaaz",
+    "kanda",
+    "eerulli",
+    "onion"
+   ],
+   "categories": [
+    "vegetables",
+    "produce"
+   ],
+   "position": [
+    -2.0,
+    0.9,
+    -9.8
+   ],
+   "approach": [
+    -2.025,
+    -10.175
+   ],
+   "facing": -3.075,
+   "shelf": {
+    "aisle": "P",
+    "bay": 3,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_potatoes_01",
+   "name": "Potatoes",
+   "kind": "product",
+   "aliases": [
+    "aloo",
+    "batata",
+    "potato"
+   ],
+   "categories": [
+    "vegetables",
+    "produce"
+   ],
+   "position": [
+    -3.5,
+    0.9,
+    -7.8
+   ],
+   "approach": [
+    -3.875,
+    -7.825
+   ],
+   "facing": -1.6374,
+   "shelf": {
+    "aisle": "P",
+    "bay": 4,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_tomatoes_01",
+   "name": "Tomatoes",
+   "kind": "product",
+   "aliases": [
+    "tamatar",
+    "tomato"
+   ],
+   "categories": [
+    "vegetables",
+    "produce"
+   ],
+   "position": [
+    -1.25,
+    0.9,
+    -6.8
+   ],
+   "approach": [
+    -1.275,
+    -6.425
+   ],
+   "facing": -0.0666,
+   "shelf": {
+    "aisle": "P",
+    "bay": 5,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_green_chillies_01",
+   "name": "Green Chillies",
+   "kind": "product",
+   "aliases": [
+    "hari mirch",
+    "mirchi"
+   ],
+   "categories": [
+    "vegetables",
+    "produce"
+   ],
+   "position": [
+    -0.5,
+    0.9,
+    -8.8
+   ],
+   "approach": [
+    -0.125,
+    -8.825
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "P",
+    "bay": 6,
+    "level": 3
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a1",
+   "name": "Aisle A1 — Breakfast, Tea & Coffee",
+   "kind": "category",
+   "aliases": [
+    "aisle 1",
+    "a1"
+   ],
+   "categories": [
+    "breakfast",
+    "tea & coffee"
+   ],
+   "position": [
+    3.8,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    3.775,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A1"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a2",
+   "name": "Aisle A2 — Atta, Rice & Dals",
+   "kind": "category",
+   "aliases": [
+    "aisle 2",
+    "a2"
+   ],
+   "categories": [
+    "staples",
+    "rice",
+    "dals & pulses",
+    "flours"
+   ],
+   "position": [
+    6.9,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    6.875,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A2"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a3",
+   "name": "Aisle A3 — Spices, Oil & Ghee",
+   "kind": "category",
+   "aliases": [
+    "aisle 3",
+    "a3"
+   ],
+   "categories": [
+    "spices",
+    "oils & ghee"
+   ],
+   "position": [
+    9.9,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    9.875,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A3"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a4",
+   "name": "Aisle A4 — Biscuits & Snacks",
+   "kind": "category",
+   "aliases": [
+    "aisle 4",
+    "a4"
+   ],
+   "categories": [
+    "snacks",
+    "biscuits",
+    "instant food"
+   ],
+   "position": [
+    13.0,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    12.975,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A4"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a5",
+   "name": "Aisle A5 — Drinks & Baby Care",
+   "kind": "category",
+   "aliases": [
+    "aisle 5",
+    "a5"
+   ],
+   "categories": [
+    "beverages",
+    "baby care"
+   ],
+   "position": [
+    16.2,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    16.225,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A5"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a6",
+   "name": "Aisle A6 — Personal Care",
+   "kind": "category",
+   "aliases": [
+    "aisle 6",
+    "a6"
+   ],
+   "categories": [
+    "personal care"
+   ],
+   "position": [
+    19.25,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    19.225,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A6"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_aisle_a7",
+   "name": "Aisle A7 — Home Care",
+   "kind": "category",
+   "aliases": [
+    "aisle 7",
+    "a7"
+   ],
+   "categories": [
+    "home care",
+    "laundry"
+   ],
+   "position": [
+    22.4,
+    0.0,
+    -9.2
+   ],
+   "approach": [
+    22.375,
+    -9.225
+   ],
+   "shelf": {
+    "aisle": "A7"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_zone_dairy",
+   "name": "Dairy & Bakery",
+   "kind": "zone",
+   "aliases": [
+    "dairy",
+    "doodh dahi",
+    "bakery"
+   ],
+   "categories": [
+    "dairy",
+    "bakery"
+   ],
+   "position": [
+    -5.4,
+    1.0,
+    -9.8
+   ],
+   "approach": [
+    -5.025,
+    -9.825
+   ],
+   "facing": 1.6374,
+   "shelf": {
+    "aisle": "D"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_zone_produce",
+   "name": "Fruits & Vegetables",
+   "kind": "zone",
+   "aliases": [
+    "fruits",
+    "vegetables",
+    "sabzi",
+    "phal",
+    "produce"
+   ],
+   "categories": [
+    "fruits",
+    "vegetables",
+    "produce"
+   ],
+   "position": [
+    -2.0,
+    0.9,
+    -6.8
+   ],
+   "approach": [
+    -2.025,
+    -6.425
+   ],
+   "facing": -0.0666,
+   "shelf": {
+    "aisle": "P"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_zone_frozen",
+   "name": "Frozen Foods",
+   "kind": "zone",
+   "aliases": [
+    "frozen",
+    "freezer"
+   ],
+   "categories": [
+    "frozen"
+   ],
+   "position": [
+    13.2,
+    0.8,
+    -18.2
+   ],
+   "approach": [
+    13.175,
+    -17.825
+   ],
+   "facing": -0.0666,
+   "shelf": {
+    "aisle": "F"
+   },
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_zone_offers",
+   "name": "Festive Offers",
+   "kind": "zone",
+   "aliases": [
+    "offers",
+    "discount",
+    "sale",
+    "deals"
+   ],
+   "categories": [
+    "offers"
+   ],
+   "position": [
+    14.7,
+    1.0,
+    -3.6
+   ],
+   "approach": [
+    14.725,
+    -3.225
+   ],
+   "facing": 0.0666,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_entrance",
+   "name": "Entrance / Exit",
+   "kind": "entrance",
+   "aliases": [
+    "exit",
+    "gate",
+    "door",
+    "bahar"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    0.0,
+    0.0,
+    1.2
+   ],
+   "approach": [
+    -0.025,
+    1.025
+   ],
+   "facing": -2.9997,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_checkout_1",
+   "name": "Checkout 1",
+   "kind": "checkout",
+   "aliases": [
+    "billing",
+    "billing counter",
+    "cash counter",
+    "checkout",
+    "payment",
+    "bill"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    8.8,
+    0.9,
+    -0.65
+   ],
+   "approach": [
+    9.175,
+    -0.625
+   ],
+   "facing": 1.5042,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_checkout_2",
+   "name": "Checkout 2",
+   "kind": "checkout",
+   "aliases": [
+    "billing",
+    "billing counter",
+    "cash counter",
+    "checkout",
+    "payment",
+    "bill"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    11.8,
+    0.9,
+    -0.65
+   ],
+   "approach": [
+    12.175,
+    -0.625
+   ],
+   "facing": 1.5042,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_checkout_3",
+   "name": "Checkout 3",
+   "kind": "checkout",
+   "aliases": [
+    "billing",
+    "billing counter",
+    "cash counter",
+    "checkout",
+    "payment",
+    "bill"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    14.8,
+    0.9,
+    -0.65
+   ],
+   "approach": [
+    15.175,
+    -0.625
+   ],
+   "facing": 1.5042,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_checkout_4",
+   "name": "Checkout 4",
+   "kind": "checkout",
+   "aliases": [
+    "billing",
+    "billing counter",
+    "cash counter",
+    "checkout",
+    "payment",
+    "bill"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    17.8,
+    0.9,
+    -0.65
+   ],
+   "approach": [
+    18.175,
+    -0.625
+   ],
+   "facing": 1.5042,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_restroom",
+   "name": "Restroom",
+   "kind": "facility",
+   "aliases": [
+    "toilet",
+    "washroom",
+    "bathroom",
+    "loo"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    -4.5,
+    1.0,
+    -18.8
+   ],
+   "approach": [
+    -4.525,
+    -18.425
+   ],
+   "facing": -0.0666,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_trolleys",
+   "name": "Trolleys & Baskets",
+   "kind": "facility",
+   "aliases": [
+    "trolley",
+    "cart",
+    "basket",
+    "shopping cart"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    -4.0,
+    0.5,
+    0.2
+   ],
+   "approach": [
+    -4.025,
+    -0.175
+   ],
+   "facing": -3.075,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  },
+  {
+   "id": "poi_customer_service",
+   "name": "Customer Service",
+   "kind": "facility",
+   "aliases": [
+    "help desk",
+    "enquiry",
+    "information",
+    "returns",
+    "service desk"
+   ],
+   "categories": [
+    "facilities"
+   ],
+   "position": [
+    4.25,
+    1.0,
+    0.4
+   ],
+   "approach": [
+    4.225,
+    0.025
+   ],
+   "facing": -3.075,
+   "source": "import",
+   "confidence": 1.0,
+   "confirmed": true
+  }
+ ]
+}
