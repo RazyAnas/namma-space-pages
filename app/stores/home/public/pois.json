@@ -1,7 +1,7 @@
 {
   "schema": "namma.pois/1",
   "storeId": "home",
-  "updatedAt": "2026-09-15T01:54:50Z",
+  "updatedAt": "2026-09-15T02:05:58Z",
   "pois": [
     {
       "id": "poi_mirror_qy91",
@@ -21,7 +21,7 @@
       "facing": -1.5708,
       "source": "manual",
       "confidence": 1.0,
-      "confirmed": false
+      "confirmed": true
     }
   ]
 }
