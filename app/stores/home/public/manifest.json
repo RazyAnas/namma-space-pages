@@ -1,0 +1,88 @@
+{
+  "schema": "namma.manifest/1",
+  "storeId": "home",
+  "name": "Home (Live Scan)",
+  "createdAt": "2026-09-14T19:00:30Z",
+  "frame": {
+    "units": "m",
+    "up": "+Y",
+    "origin": "scan-start"
+  },
+  "notes": [
+    "live-scan",
+    "not anchored to marker M0: the map origin is where the scan started; the AR guide cannot align to this map until a scan sees M0",
+    "M0 cell is not free",
+    "coverage 47.1% < 50%: large unknown areas inside the scanned extent",
+    "no marker other than M0 was observed: no landmarks for AR re-sync"
+  ],
+  "scene": {
+    "format": "none",
+    "url": "",
+    "lod": false,
+    "splatCount": 0,
+    "bbox": {
+      "min": [
+        -3.25,
+        0.105,
+        -6.35
+      ],
+      "max": [
+        4.1,
+        1.905,
+        4.9
+      ]
+    }
+  },
+  "navgrid": {
+    "url": "navgrid.bin",
+    "agentRadiusMm": 250
+  },
+  "heights": "heights.bin",
+  "pois": "pois.json",
+  "markers": "markers.json",
+  "spawn": {
+    "position": [
+      0.575,
+      1.705,
+      0.875
+    ],
+    "yaw": 0.0
+  },
+  "quality": {
+    "walkableM2": 5.11,
+    "coveragePct": 47.1,
+    "freeM2": 9.15,
+    "blockedM2": 21.51,
+    "markerResidualM": 0,
+    "alignmentRefusals": 0,
+    "scanDurationS": 129.5,
+    "walkedM": 30.28,
+    "frames": 1282,
+    "depthSamples": 3582720
+  },
+  "pipeline": {
+    "version": "scan-ingest/1",
+    "source": "live-scan",
+    "scan": null,
+    "scanCreatedAt": "2026-09-14T18:54:08.775Z",
+    "params": {
+      "min_hits": 3,
+      "blocked_ratio": 0.35,
+      "min_passes": 2,
+      "min_obstacle_height_m": 0.0,
+      "close_m": 0.1,
+      "free_close_m": 0.1,
+      "seed_search_m": 1.0,
+      "crop_margin_m": 0.5,
+      "agent_radius_mm": 250
+    },
+    "stages": [
+      {
+        "name": "scan-ingest",
+        "seconds": 0.007,
+        "peakRssMb": 0.0,
+        "diskMb": 0.341
+      }
+    ]
+  }
+}

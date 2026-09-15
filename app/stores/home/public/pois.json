@@ -1,0 +1,27 @@
+{
+  "schema": "namma.pois/1",
+  "storeId": "home",
+  "updatedAt": "2026-09-15T01:54:50Z",
+  "pois": [
+    {
+      "id": "poi_mirror_qy91",
+      "name": "cupboard",
+      "kind": "facility",
+      "aliases": [],
+      "categories": [],
+      "position": [
+        2.05,
+        1.2,
+        -1.49
+      ],
+      "approach": [
+        1.775,
+        -1.475
+      ],
+      "facing": -1.5708,
+      "source": "manual",
+      "confidence": 1.0,
+      "confirmed": false
+    }
+  ]
+}
